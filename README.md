@@ -76,7 +76,7 @@ Creating a dropdown:
         end
     })
 
-Adding/destroying dropdowns:
+Adding/destroying dropdown buttons:
 
     dropdown:Add("Title", value)
     dropdown:Remove("Title")
