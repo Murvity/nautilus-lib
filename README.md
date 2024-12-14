@@ -1,4 +1,4 @@
-Nautilus is a free UI and is currently a work in progress! Here's what it offers so far:
+Nautilus is a free UI library, here's what it offers so far:
 ------------------------------------------------------
 
 
