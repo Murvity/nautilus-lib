@@ -36,7 +36,12 @@ function Library:new(options)
 	}, options or {})
 	
 	local GUI = {
-		CurrentTab = nil
+		CurrentTab = nil,
+		StartDrag = nil,
+		Dragging = false,
+		StartPos = nil,
+		Hover = false,
+		Hover2 = false
 	}
 	
 	-- Main Frame
@@ -50,7 +55,7 @@ function Library:new(options)
 		-- StarterGui.MyLibrary.Main
 		GUI["2"] = Instance.new("Frame", GUI["1"]);
 		GUI["2"]["BorderSizePixel"] = 0;
-		GUI["2"]["BackgroundColor3"] = Color3.fromRGB(3, 3, 9);
+		GUI["2"]["BackgroundColor3"] = Color3.fromRGB(2, 2, 8);
 		GUI["2"]["AnchorPoint"] = Vector2.new(0, 0);
 		GUI["2"]["Size"] = UDim2.new(0, 400, 0, 300);
 		GUI["2"]["Position"] = UDim2.fromOffset((Viewport.X/2) - (GUI["2"].Size.X.Offset / 2), (Viewport.Y/2) - (GUI["2"].Size.Y.Offset / 2));
@@ -89,7 +94,7 @@ function Library:new(options)
 		-- StarterGui.MyLibrary.Main.TopBar
 		GUI["6"] = Instance.new("Frame", GUI["2"]);
 		GUI["6"]["BorderSizePixel"] = 0;
-		GUI["6"]["BackgroundColor3"] = Color3.fromRGB(2, 2, 5);
+		GUI["6"]["BackgroundColor3"] = Color3.fromRGB(1, 1, 4);
 		GUI["6"]["Size"] = UDim2.new(1, 0, 0, 30);
 		GUI["6"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 		GUI["6"]["Name"] = [[TopBar]];
@@ -103,7 +108,7 @@ function Library:new(options)
 		-- StarterGui.MyLibrary.Main.TopBar.Extension
 		GUI["8"] = Instance.new("Frame", GUI["6"]);
 		GUI["8"]["BorderSizePixel"] = 0;
-		GUI["8"]["BackgroundColor3"] = Color3.fromRGB(2, 2, 5);
+		GUI["8"]["BackgroundColor3"] = Color3.fromRGB(1, 1, 4);
 		GUI["8"]["AnchorPoint"] = Vector2.new(0, 1);
 		GUI["8"]["Size"] = UDim2.new(1, 0, 0.5, 0);
 		GUI["8"]["Position"] = UDim2.new(0, 0, 1, 0);
@@ -111,64 +116,80 @@ function Library:new(options)
 		GUI["8"]["Name"] = [[Extension]];
 
 
-		-- StarterGui.MyLibrary.Main.TopBar.Title
-		GUI["9"] = Instance.new("TextLabel", GUI["6"]);
-		GUI["9"]["BorderSizePixel"] = 0;
-		GUI["9"]["TextXAlignment"] = Enum.TextXAlignment.Left;
-		GUI["9"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-		GUI["9"]["TextSize"] = 18;
-		GUI["9"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
-		GUI["9"]["TextColor3"] = Color3.fromRGB(62, 62, 149);
-		GUI["9"]["BackgroundTransparency"] = 1;
-		GUI["9"]["Size"] = UDim2.new(0.5, 0, 1, 0);
-		GUI["9"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-		GUI["9"]["Text"] = options["name"];
-		GUI["9"]["Name"] = options["name"];
-
-
-		-- StarterGui.MyLibrary.Main.TopBar.Title.UIPadding
-		GUI["a"] = Instance.new("UIPadding", GUI["9"]);
-		GUI["a"]["PaddingTop"] = UDim.new(0, 1);
-		GUI["a"]["PaddingLeft"] = UDim.new(0, 10);
-
-
 		-- StarterGui.MyLibrary.Main.TopBar.Line
-		GUI["b"] = Instance.new("Frame", GUI["6"]);
+		GUI["9"] = Instance.new("Frame", GUI["6"]);
+		GUI["9"]["BorderSizePixel"] = 0;
+		GUI["9"]["BackgroundColor3"] = Color3.fromRGB(28, 28, 67);
+		GUI["9"]["AnchorPoint"] = Vector2.new(0, 1);
+		GUI["9"]["Size"] = UDim2.new(1, 0, 0, 1);
+		GUI["9"]["Position"] = UDim2.new(0, 0, 1, 0);
+		GUI["9"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+		GUI["9"]["Name"] = [[Line]];
+
+
+		-- StarterGui.MyLibrary.Main.TopBar.Shell
+		GUI["a"] = Instance.new("ImageLabel", GUI["6"]);
+		GUI["a"]["BorderSizePixel"] = 0;
+		GUI["a"]["BackgroundColor3"] = Color3.fromRGB(2, 6, 255);
+		GUI["a"]["ScaleType"] = Enum.ScaleType.Fit;
+		GUI["a"]["ImageColor3"] = Color3.fromRGB(76, 76, 182);
+		GUI["a"]["Image"] = [[rbxassetid://126678697203229]];
+		GUI["a"]["Size"] = UDim2.new(0, 18, 0, 18);
+		GUI["a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+		GUI["a"]["BackgroundTransparency"] = 1;
+		GUI["a"]["Name"] = [[Shell]];
+		GUI["a"]["Position"] = UDim2.new(0, 6, 0, 6);
+
+
+		-- StarterGui.MyLibrary.Main.TopBar.NAUTILUS
+		GUI["b"] = Instance.new("TextLabel", GUI["6"]);
+		GUI["b"]["TextWrapped"] = true;
+		GUI["b"]["LineHeight"] = 0;
 		GUI["b"]["BorderSizePixel"] = 0;
-		GUI["b"]["BackgroundColor3"] = Color3.fromRGB(28, 28, 67);
-		GUI["b"]["AnchorPoint"] = Vector2.new(0, 1);
-		GUI["b"]["Size"] = UDim2.new(1, 0, 0, 1);
-		GUI["b"]["Position"] = UDim2.new(0, 0, 1, 0);
+		GUI["b"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+		GUI["b"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+		GUI["b"]["TextSize"] = 18;
+		GUI["b"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+		GUI["b"]["TextColor3"] = Color3.fromRGB(63, 63, 150);
+		GUI["b"]["BackgroundTransparency"] = 1;
+		GUI["b"]["Size"] = UDim2.new(0.5, 0, 1, 0);
 		GUI["b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-		GUI["b"]["Name"] = [[Line]];
+		GUI["b"]["Text"] = [[NAUTILUS]];
+		GUI["b"]["Name"] = [[NAUTILUS]];
 
 
-		-- StarterGui.MyLibrary.Main.TopBar.Minimize
-		GUI["c"] = Instance.new("ImageLabel", GUI["6"]);
-		GUI["c"]["BorderSizePixel"] = 0;
-		GUI["c"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-		GUI["c"]["ImageColor3"] = Color3.fromRGB(75, 75, 181);
-		GUI["c"]["AnchorPoint"] = Vector2.new(1, 0.5);
-		GUI["c"]["Image"] = [[rbxassetid://79024877985159]];
-		GUI["c"]["Size"] = UDim2.new(0, 18, 0, 18);
-		GUI["c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-		GUI["c"]["BackgroundTransparency"] = 1;
-		GUI["c"]["Name"] = [[Minimize]];
-		GUI["c"]["Position"] = UDim2.new(1, -29, 0.5, 0);
+		-- StarterGui.MyLibrary.Main.TopBar.NAUTILUS.UIPadding
+		GUI["c"] = Instance.new("UIPadding", GUI["b"]);
+		GUI["c"]["PaddingTop"] = UDim.new(0, -2);
+		GUI["c"]["PaddingLeft"] = UDim.new(0, 29);
 
 
-		-- StarterGui.MyLibrary.Main.TopBar.Exit
-		GUI["d"] = Instance.new("ImageLabel", GUI["6"]);
+		-- StarterGui.MyLibrary.Main.TopBar.Exit1
+		GUI["d"] = Instance.new("ImageButton", GUI["6"]);
 		GUI["d"]["BorderSizePixel"] = 0;
 		GUI["d"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-		GUI["d"]["ImageColor3"] = Color3.fromRGB(75, 75, 181);
-		GUI["d"]["AnchorPoint"] = Vector2.new(1, 0.5);
-		GUI["d"]["Image"] = [[rbxassetid://98393819660987]];
-		GUI["d"]["Size"] = UDim2.new(0, 22, 0, 22);
-		GUI["d"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+		GUI["d"]["ImageColor3"] = Color3.fromRGB(32, 32, 77);
+		GUI["d"]["Image"] = [[rbxassetid://89857762984221]];
+		GUI["d"]["Size"] = UDim2.new(0, 19, 0, 19);
 		GUI["d"]["BackgroundTransparency"] = 1;
-		GUI["d"]["Name"] = [[Exit]];
-		GUI["d"]["Position"] = UDim2.new(1, -4, 0.5, 0);
+		GUI["d"]["Name"] = [[Exit1]];
+		GUI["d"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+		GUI["d"]["Position"] = UDim2.new(1, -24, 0, 5);
+		GUI["d"]["ZIndex"] = 5
+
+
+		-- StarterGui.MyLibrary.Main.TopBar.Minimize1
+		GUI["e"] = Instance.new("ImageButton", GUI["6"]);
+		GUI["e"]["BorderSizePixel"] = 0;
+		GUI["e"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+		GUI["e"]["ImageColor3"] = Color3.fromRGB(32, 32, 77);
+		GUI["e"]["Image"] = [[rbxassetid://75333583359777]];
+		GUI["e"]["Size"] = UDim2.new(0, 17, 0, 17);
+		GUI["e"]["BackgroundTransparency"] = 1;
+		GUI["e"]["Name"] = [[Minimize1]];
+		GUI["e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+		GUI["e"]["Position"] = UDim2.new(1, -44, 0, 6);
+		GUI["e"]["ZIndex"] = 5
 		
 		-- StarterGui.MyLibrary.Main.Contents
 		GUI["1c"] = Instance.new("Frame", GUI["2"]);
@@ -250,6 +271,46 @@ function Library:new(options)
 		GUI["1b"]["Name"] = [[Line]];
 	end
 	
+	-- Top Bar Logic (make draggable)
+	do
+		GUI["6"].MouseEnter:Connect(function()
+			GUI.Hover = true
+		end)
+
+		GUI["6"].MouseLeave:Connect(function()
+			GUI.Hover = false
+		end)
+		
+		UIS.InputBegan:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseButton1 then
+				if GUI.Hover then
+					GUI.Dragging = true
+					GUI.StartDrag = input.Position
+					GUI.StartPos = GUI["6"].Parent["Position"]
+					
+					input.Changed:Connect(function()
+						if input.UserInputState == Enum.UserInputState.End then
+							GUI.Dragging = false
+						end
+					end)
+				end
+			end
+		end)
+		
+		UIS.InputChanged:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseMovement then
+				if GUI.Hover then
+					if GUI.Dragging then
+						local Delta = input.Position - GUI.StartDrag
+						GUI["6"].Parent["Position"] = UDim2.new(GUI.StartPos.X.Scale, GUI.StartPos.X.Offset + Delta.X, GUI.StartPos.Y.Scale, GUI.StartPos.Y.Offset + Delta.Y)
+					end
+				end
+			end
+		end)
+	end
+	
+	
+	-- Control functions / methods
 	function GUI:CreateTab(options)
 		options = Library:validate({
 			title = "Main",
@@ -1078,7 +1139,7 @@ function Library:new(options)
 			
 			function Dropdown:Toggle()
 				if Dropdown.Open then
-					Library:tween(Dropdown["2c"], {Size = UDim2.new(1, 0, 0, 30)}, function()
+					Library:tween(Dropdown["2c"], {Size = UDim2.new(1, 0, 0, 32)}, function()
 						Dropdown["32"].Visible = false
 					end)
 				else
@@ -1158,7 +1219,6 @@ function Library:new(options)
 		
 		return Tab
 	end
-	
 	
 	return GUI
 end
