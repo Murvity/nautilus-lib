@@ -1163,4 +1163,5 @@ function Library:new(options)
 	return GUI
 end
 
-return Library
+local Nautilus = Library:new()
+return Nautilus
