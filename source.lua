@@ -41,7 +41,10 @@ function Library:new(options)
 		Dragging = false,
 		StartPos = nil,
 		Hover = false,
-		Hover2 = false
+		Hover2 = false,
+		Hover3 = false,
+		Done = false,
+		ToggleInactive = false
 	}
 	
 	-- Main Frame
@@ -179,17 +182,17 @@ function Library:new(options)
 
 
 		-- StarterGui.MyLibrary.Main.TopBar.Minimize1
-		GUI["e"] = Instance.new("ImageButton", GUI["6"]);
-		GUI["e"]["BorderSizePixel"] = 0;
-		GUI["e"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-		GUI["e"]["ImageColor3"] = Color3.fromRGB(32, 32, 77);
-		GUI["e"]["Image"] = [[rbxassetid://75333583359777]];
-		GUI["e"]["Size"] = UDim2.new(0, 17, 0, 17);
-		GUI["e"]["BackgroundTransparency"] = 1;
-		GUI["e"]["Name"] = [[Minimize1]];
-		GUI["e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-		GUI["e"]["Position"] = UDim2.new(1, -44, 0, 6);
-		GUI["e"]["ZIndex"] = 5
+		GUI["1e"] = Instance.new("ImageButton", GUI["6"]);
+		GUI["1e"]["BorderSizePixel"] = 0;
+		GUI["1e"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+		GUI["1e"]["ImageColor3"] = Color3.fromRGB(32, 32, 77);
+		GUI["1e"]["Image"] = [[rbxassetid://75333583359777]];
+		GUI["1e"]["Size"] = UDim2.new(0, 17, 0, 17);
+		GUI["1e"]["BackgroundTransparency"] = 1;
+		GUI["1e"]["Name"] = [[Minimize1]];
+		GUI["1e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+		GUI["1e"]["Position"] = UDim2.new(1, -44, 0, 6);
+		GUI["1e"]["ZIndex"] = 5
 		
 		-- StarterGui.MyLibrary.Main.Contents
 		GUI["1c"] = Instance.new("Frame", GUI["2"]);
@@ -271,8 +274,9 @@ function Library:new(options)
 		GUI["1b"]["Name"] = [[Line]];
 	end
 	
-	-- Top Bar Logic (make draggable)
+	-- Top Bar Logic
 	do
+		-- For dragging
 		GUI["6"].MouseEnter:Connect(function()
 			GUI.Hover = true
 		end)
@@ -280,6 +284,7 @@ function Library:new(options)
 		GUI["6"].MouseLeave:Connect(function()
 			GUI.Hover = false
 		end)
+		
 		
 		UIS.InputBegan:Connect(function(input)
 			if input.UserInputType == Enum.UserInputType.MouseButton1 then
@@ -307,6 +312,126 @@ function Library:new(options)
 				end
 			end
 		end)
+		
+		
+		
+		
+		
+		-- For minimize button
+		GUI["1e"].MouseEnter:Connect(function()
+			Library:tween(GUI["1e"], {ImageColor3 = Color3.fromRGB(55, 55, 134)})
+			GUI.Hover2 = true
+		end)
+
+		GUI["1e"].MouseLeave:Connect(function()
+			Library:tween(GUI["1e"], {ImageColor3 = Color3.fromRGB(32, 32, 77)})
+			GUI.Hover2 = false
+		end)
+
+		UIS.InputBegan:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseButton1 then
+				if GUI.Hover2 and not GUI.Done then
+					Library:tween(GUI["6"], {Size = UDim2.new(0, 75, 0, 30)})
+					GUI["1e"]["Image"] = [[rbxassetid://109320228387073]]
+					for i, v in pairs(GUI["1"]:GetDescendants()) do
+						if v.Name == "Checkmark" and v.ImageTransparency == 1 then
+							GUI.ToggleInactive = true
+						end
+						
+						if v.Name ~= GUI["6"].Name then
+							if v:IsA("Frame") then
+								Library:tween(v, {BackgroundTransparency = 1})
+							end
+							
+							if v:IsA("TextLabel") then
+								Library:tween(v, {BackgroundTransparency = 1})
+								Library:tween(v, {TextTransparency = 1})
+							end
+							
+							if v:IsA("ImageLabel") then
+								Library:tween(v, {ImageTransparency = 1})
+							end
+							
+							if v:IsA("UIStroke") then
+								Library:tween(v, {Transparency = 1})
+							end
+						end
+					end
+					GUI.Done = not GUI.Done
+				elseif GUI.Hover2 and GUI.Done then
+					Library:tween(GUI["6"], {Size = UDim2.new(1, 0, 0, 30)})
+					GUI["1e"]["Image"] = [[rbxassetid://75333583359777]]
+					for i, v in pairs(GUI["1"]:GetDescendants()) do
+						if v.Name ~= GUI["6"].Name and v.Name ~= "ButtonHolder" and v.Name ~= "Contents" and v.Name ~= "DropShadowHolder" and v.Name ~= "OptionHolder" then
+							if v:IsA("Frame") then
+								Library:tween(v, {BackgroundTransparency = 0})
+							end
+
+							if v:IsA("TextLabel") then
+								if v.Name == "Inactive-MainTab" then
+									Library:tween(v, {BackgroundTransparency = 0})
+								end
+								
+								if v.Name == "Inactive Option" then
+									Library:tween(v, {BackgroundTransparency = 0})
+								end
+								Library:tween(v, {TextTransparency = 0})
+							end
+
+							if v:IsA("ImageLabel") then
+								if GUI.ToggleInactive then
+									if v.Name ~= "Checkmark" then
+										Library:tween(v, {ImageTransparency = 0})                     -- NEED TO FIX THIS PART OF THE SCRIPT!!!!!!!!!!!!!!!!!
+									end
+								else
+									Library:tween(v, {ImageTransparency = 0})
+								end
+							end
+							
+							if v:IsA("UIStroke") then
+								Library:tween(v, {Transparency = 0})
+							end
+							
+							if v.Name == "DropShadow" then
+								Library:tween(v, {ImageTransparency = 0.5})
+							end
+						end
+					end
+					GUI.Done = not GUI.Done
+					GUI.ToggleInactive = false
+				end
+			end
+		end)
+		
+		
+		
+		
+		
+		
+		
+		-- For exiting
+		GUI["d"].MouseEnter:Connect(function()
+			Library:tween(GUI["d"], {ImageColor3 = Color3.fromRGB(55, 55, 134)})
+			GUI.Hover3 = true
+		end)
+
+		GUI["d"].MouseLeave:Connect(function()
+			Library:tween(GUI["d"], {ImageColor3 = Color3.fromRGB(32, 32, 77)})
+			GUI.Hover3 = false
+		end)
+
+		UIS.InputBegan:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseButton1 then
+				if GUI.Hover3 then
+					for i, v in pairs(GUI["1"]:GetDescendants()) do
+						v:Destroy()
+					end
+					
+					GUI["1"]:Destroy()
+				end
+			end
+		end)
+
 	end
 	
 	
@@ -329,7 +454,7 @@ function Library:new(options)
 			Tab["18"] = Instance.new("TextLabel", GUI["12"]);
 			Tab["18"]["BorderSizePixel"] = 0;
 			Tab["18"]["TextXAlignment"] = Enum.TextXAlignment.Left;
-			Tab["18"]["BackgroundColor3"] = Color3.fromRGB(15, 15, 52);
+			Tab["18"]["BackgroundColor3"] = Color3.fromRGB(17, 17, 50);
 			Tab["18"]["TextSize"] = 14;
 			Tab["18"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Medium, Enum.FontStyle.Normal);
 			Tab["18"]["TextColor3"] = Color3.fromRGB(33, 33, 78);
