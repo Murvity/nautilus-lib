@@ -332,7 +332,7 @@ function Library:new(options)
 			if input.UserInputType == Enum.UserInputType.MouseButton1 then
 				if GUI.Hover2 and not GUI.Done then
 					Library:tween(GUI["6"], {Size = UDim2.new(0, 75, 0, 30)})
-					GUI["1e"]["Image"] = [[rbxassetid://109320228387073]]
+					GUI["1e"]["Image"] = [[rbxassetid://83494634417832]]
 					for i, v in pairs(GUI["1"]:GetDescendants()) do
 						if v.Name == "Checkmark" and v.ImageTransparency == 1 then
 							GUI.ToggleInactive = true
