@@ -94,7 +94,7 @@ function Library:new(options)
 		-- StarterGui.MyLibrary.Main.TopBar
 		GUI["6"] = Instance.new("Frame", GUI["2"]);
 		GUI["6"]["BorderSizePixel"] = 0;
-		GUI["6"]["BackgroundColor3"] = Color3.fromRGB(3, 3, 12);
+		GUI["6"]["BackgroundColor3"] = Color3.fromRGB(3, 3, 8);
 		GUI["6"]["Size"] = UDim2.new(1, 0, 0, 30);
 		GUI["6"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 		GUI["6"]["Name"] = [[TopBar]];
@@ -108,7 +108,7 @@ function Library:new(options)
 		-- StarterGui.MyLibrary.Main.TopBar.Extension
 		GUI["8"] = Instance.new("Frame", GUI["6"]);
 		GUI["8"]["BorderSizePixel"] = 0;
-		GUI["8"]["BackgroundColor3"] = Color3.fromRGB(3, 3, 12);
+		GUI["8"]["BackgroundColor3"] = Color3.fromRGB(3, 3, 8);
 		GUI["8"]["AnchorPoint"] = Vector2.new(0, 1);
 		GUI["8"]["Size"] = UDim2.new(1, 0, 0.5, 0);
 		GUI["8"]["Position"] = UDim2.new(0, 0, 1, 0);
