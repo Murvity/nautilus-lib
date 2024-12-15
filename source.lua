@@ -55,7 +55,7 @@ function Library:new(options)
 		-- StarterGui.MyLibrary.Main
 		GUI["2"] = Instance.new("Frame", GUI["1"]);
 		GUI["2"]["BorderSizePixel"] = 0;
-		GUI["2"]["BackgroundColor3"] = Color3.fromRGB(2, 2, 8);
+		GUI["2"]["BackgroundColor3"] = Color3.fromRGB(5, 5, 20);
 		GUI["2"]["AnchorPoint"] = Vector2.new(0, 0);
 		GUI["2"]["Size"] = UDim2.new(0, 400, 0, 300);
 		GUI["2"]["Position"] = UDim2.fromOffset((Viewport.X/2) - (GUI["2"].Size.X.Offset / 2), (Viewport.Y/2) - (GUI["2"].Size.Y.Offset / 2));
@@ -208,7 +208,7 @@ function Library:new(options)
 		-- StarterGui.MyLibrary.Main.Navigation
 		GUI["e"] = Instance.new("Frame", GUI["2"]);
 		GUI["e"]["BorderSizePixel"] = 0;
-		GUI["e"]["BackgroundColor3"] = Color3.fromRGB(5, 5, 16);
+		GUI["e"]["BackgroundColor3"] = Color3.fromRGB(10, 10, 30);
 		GUI["e"]["Size"] = UDim2.new(0, 120, 1, -31);
 		GUI["e"]["Position"] = UDim2.new(0, 0, 0, 30);
 		GUI["e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
@@ -223,7 +223,7 @@ function Library:new(options)
 		-- StarterGui.MyLibrary.Main.Navigation.Hide
 		GUI["10"] = Instance.new("Frame", GUI["e"]);
 		GUI["10"]["BorderSizePixel"] = 0;
-		GUI["10"]["BackgroundColor3"] = Color3.fromRGB(5, 5, 16);
+		GUI["10"]["BackgroundColor3"] = Color3.fromRGB(10, 10, 30);
 		GUI["10"]["Size"] = UDim2.new(1, 0, 0, 20);
 		GUI["10"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 		GUI["10"]["Name"] = [[Hide]];
@@ -232,7 +232,7 @@ function Library:new(options)
 		-- StarterGui.MyLibrary.Main.Navigation.Hide2
 		GUI["11"] = Instance.new("Frame", GUI["e"]);
 		GUI["11"]["BorderSizePixel"] = 0;
-		GUI["11"]["BackgroundColor3"] = Color3.fromRGB(5, 5, 16);
+		GUI["11"]["BackgroundColor3"] = Color3.fromRGB(10, 10, 30);
 		GUI["11"]["AnchorPoint"] = Vector2.new(1, 0);
 		GUI["11"]["Size"] = UDim2.new(0, 20, 1, 0);
 		GUI["11"]["Position"] = UDim2.new(1, 0, 0, 0);
@@ -329,7 +329,7 @@ function Library:new(options)
 			Tab["18"] = Instance.new("TextLabel", GUI["12"]);
 			Tab["18"]["BorderSizePixel"] = 0;
 			Tab["18"]["TextXAlignment"] = Enum.TextXAlignment.Left;
-			Tab["18"]["BackgroundColor3"] = Color3.fromRGB(8, 8, 27);
+			Tab["18"]["BackgroundColor3"] = Color3.fromRGB(15, 15, 52);
 			Tab["18"]["TextSize"] = 14;
 			Tab["18"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Medium, Enum.FontStyle.Normal);
 			Tab["18"]["TextColor3"] = Color3.fromRGB(33, 33, 78);
@@ -471,7 +471,7 @@ function Library:new(options)
 				-- StarterGui.MyLibrary.Main.Contents.Main.Button
 				Button["1e"] = Instance.new("Frame", Tab["1d"]);
 				Button["1e"]["BorderSizePixel"] = 0;
-				Button["1e"]["BackgroundColor3"] = Color3.fromRGB(5, 5, 16);
+				Button["1e"]["BackgroundColor3"] = Color3.fromRGB(10, 10, 30);
 				Button["1e"]["Size"] = UDim2.new(1, 0, 0, 32);
 				Button["1e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 				Button["1e"]["Name"] = [[Button]];
@@ -564,10 +564,10 @@ function Library:new(options)
 					if input.UserInputType == Enum.UserInputType.MouseButton1 then
 						Button.MouseDown = false
 						if Button.Hover then
-							Library:tween(Button["1e"], {BackgroundColor3 = Color3.fromRGB(4, 4, 15)})
+							Library:tween(Button["1e"], {BackgroundColor3 = Color3.fromRGB(10, 10, 30)})
 							Library:tween(Button["20"], {Color = Color3.fromRGB(55, 55, 134)})
 						else
-							Library:tween(Button["1e"], {BackgroundColor3 = Color3.fromRGB(4, 4, 15)})
+							Library:tween(Button["1e"], {BackgroundColor3 = Color3.fromRGB(10, 10, 30)})
 							Library:tween(Button["20"], {Color = Color3.fromRGB(27, 27, 66)})
 						end
 					end
@@ -597,7 +597,7 @@ function Library:new(options)
 				-- StarterGui.MyLibrary.Main.Contents.Main.Slider
 				Slider["3d"] = Instance.new("Frame", Tab["1d"]);
 				Slider["3d"]["BorderSizePixel"] = 0;
-				Slider["3d"]["BackgroundColor3"] = Color3.fromRGB(5, 5, 16);
+				Slider["3d"]["BackgroundColor3"] = Color3.fromRGB(10, 10, 30);
 				Slider["3d"]["Size"] = UDim2.new(1, 0, 0, 38);
 				Slider["3d"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 				Slider["3d"]["Name"] = [[Slider]];
@@ -749,12 +749,12 @@ function Library:new(options)
 					if input.UserInputType == Enum.UserInputType.MouseButton1 then
 						Slider.MouseDown = false
 						if Slider.Hover then
-							Library:tween(Slider["3d"], {BackgroundColor3 = Color3.fromRGB(4, 4, 15)})
+							Library:tween(Slider["3d"], {BackgroundColor3 = Color3.fromRGB(10, 10, 30)})
 							Library:tween(Slider["3f"], {Color = Color3.fromRGB(55, 55, 134)})
 							Library:tween(Slider["44"], {Color = Color3.fromRGB(55, 55, 134)})
 							Library:tween(Slider["45"], {BackgroundColor3 = Color3.fromRGB(55, 55, 134)})
 						else
-							Library:tween(Slider["3d"], {BackgroundColor3 = Color3.fromRGB(4, 4, 15)})
+							Library:tween(Slider["3d"], {BackgroundColor3 = Color3.fromRGB(10, 10, 30)})
 							Library:tween(Slider["3f"], {Color = Color3.fromRGB(27, 27, 66)})
 							Library:tween(Slider["44"], {Color = Color3.fromRGB(27, 27, 66)})
 							Library:tween(Slider["45"], {BackgroundColor3 = Color3.fromRGB(27, 27, 66)})
@@ -786,7 +786,7 @@ function Library:new(options)
 				-- StarterGui.MyLibrary.Main.Contents.Main.ToggleInactive
 				Toggle["51"] = Instance.new("Frame", Tab["1d"]);
 				Toggle["51"]["BorderSizePixel"] = 0;
-				Toggle["51"]["BackgroundColor3"] = Color3.fromRGB(5, 5, 16);
+				Toggle["51"]["BackgroundColor3"] = Color3.fromRGB(10, 10, 30);
 				Toggle["51"]["Size"] = UDim2.new(1, 0, 0, 32);
 				Toggle["51"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 				Toggle["51"]["Name"] = [[ToggleInactive]];
@@ -829,7 +829,7 @@ function Library:new(options)
 				Toggle["56"] = Instance.new("Frame", Toggle["51"]);
 				Toggle["56"]["Active"] = true;
 				Toggle["56"]["BorderSizePixel"] = 0;
-				Toggle["56"]["BackgroundColor3"] = Color3.fromRGB(5, 5, 16);
+				Toggle["56"]["BackgroundColor3"] = Color3.fromRGB(10, 10, 30);
 				Toggle["56"]["AnchorPoint"] = Vector2.new(1, 0.5);
 				Toggle["56"]["Size"] = UDim2.new(0, 16, 0, 16);
 				Toggle["56"]["Position"] = UDim2.new(1, -2, 0.5, 0);
@@ -850,7 +850,7 @@ function Library:new(options)
 				-- StarterGui.MyLibrary.Main.Contents.Main.ToggleInactive.CheckmarkHolder.Checkmark
 				Toggle["59"] = Instance.new("ImageLabel", Toggle["56"]);
 				Toggle["59"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-				Toggle["59"]["ImageColor3"] = Color3.fromRGB(75, 75, 181);
+				Toggle["59"]["ImageColor3"] = Color3.fromRGB(81, 81, 194);
 				Toggle["59"]["ImageTransparency"] = 1
 				Toggle["59"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
 				Toggle["59"]["Image"] = [[rbxassetid://138347497145448]];
@@ -872,10 +872,10 @@ function Library:new(options)
 				end
 				
 				if Toggle.State then
-					Library:tween(Toggle["56"], {BackgroundColor3 = Color3.fromRGB(20, 20, 49)})
+					Library:tween(Toggle["56"], {BackgroundColor3 = Color3.fromRGB(46, 46, 113)})
 					Library:tween(Toggle["59"], {ImageTransparency = 0})
 				else
-					Library:tween(Toggle["56"], {BackgroundColor3 = Color3.fromRGB(4, 4, 15)})
+					Library:tween(Toggle["56"], {BackgroundColor3 = Color3.fromRGB(10, 10, 30)})
 					Library:tween(Toggle["59"], {ImageTransparency = 1})
 				end
 				options.callback(Toggle.State)
@@ -913,11 +913,11 @@ function Library:new(options)
 					if input.UserInputType == Enum.UserInputType.MouseButton1 then
 						Toggle.MouseDown = false
 						if Toggle.Hover then
-							Library:tween(Toggle["51"], {BackgroundColor3 = Color3.fromRGB(5, 5, 16)})
+							Library:tween(Toggle["51"], {BackgroundColor3 = Color3.fromRGB(10, 10, 30)})
 							Library:tween(Toggle["53"], {Color = Color3.fromRGB(55, 55, 134)})
 							
 						else
-							Library:tween(Toggle["51"], {BackgroundColor3 = Color3.fromRGB(5, 5, 16)})
+							Library:tween(Toggle["51"], {BackgroundColor3 = Color3.fromRGB(10, 10, 30)})
 							Library:tween(Toggle["53"], {Color = Color3.fromRGB(28, 28, 67)})
 						end
 					end
@@ -953,7 +953,7 @@ function Library:new(options)
 				-- StarterGui.MyLibrary.Main.Contents.Main.Dropdown
 				Dropdown["2c"] = Instance.new("Frame", Tab["1d"]);
 				Dropdown["2c"]["BorderSizePixel"] = 0;
-				Dropdown["2c"]["BackgroundColor3"] = Color3.fromRGB(5, 5, 16);
+				Dropdown["2c"]["BackgroundColor3"] = Color3.fromRGB(10, 10, 30);
 				Dropdown["2c"]["ClipsDescendants"] = true;
 				Dropdown["2c"]["Size"] = UDim2.new(1, 0, 0, 32);
 				Dropdown["2c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
@@ -1041,7 +1041,7 @@ function Library:new(options)
 				-- StarterGui.MyLibrary.Main.Contents.Main.Dropdown.OptionHolder.Inactive Option
 				Dropdown.Items[id].Instance["37"] = Instance.new("TextLabel", Dropdown["32"]);
 				Dropdown.Items[id].Instance["37"]["BorderSizePixel"] = 0;
-				Dropdown.Items[id].Instance["37"]["BackgroundColor3"] = Color3.fromRGB(11, 11, 30);
+				Dropdown.Items[id].Instance["37"]["BackgroundColor3"] = Color3.fromRGB(13, 13, 39);
 				Dropdown.Items[id].Instance["37"]["TextSize"] = 12;
 				Dropdown.Items[id].Instance["37"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
 				Dropdown.Items[id].Instance["37"]["TextColor3"] = Color3.fromRGB(75, 75, 181);
@@ -1107,10 +1107,10 @@ function Library:new(options)
 					if input.UserInputType == Enum.UserInputType.MouseButton1 then
 						Item.MouseDown = false
 						if Item.Hover then
-							Library:tween(Dropdown.Items[id].Instance["37"], {BackgroundColor3 = Color3.fromRGB(4, 4, 15)})
+							Library:tween(Dropdown.Items[id].Instance["37"], {BackgroundColor3 = Color3.fromRGB(13, 13, 39)})
 							Library:tween(Dropdown.Items[id].Instance["38"], {Color = Color3.fromRGB(55, 55, 134)})
 						else
-							Library:tween(Dropdown.Items[id].Instance["37"], {BackgroundColor3 = Color3.fromRGB(4, 4, 15)})
+							Library:tween(Dropdown.Items[id].Instance["37"], {BackgroundColor3 = Color3.fromRGB(13, 13, 39)})
 							Library:tween(Dropdown.Items[id].Instance["38"], {Color = Color3.fromRGB(27, 27, 66)})
 						end
 					end
@@ -1202,10 +1202,10 @@ function Library:new(options)
 					if input.UserInputType == Enum.UserInputType.MouseButton1 then
 						Dropdown.MouseDown = false
 						if Dropdown.Hover then
-							Library:tween(Dropdown["2c"], {BackgroundColor3 = Color3.fromRGB(4, 4, 15)})
+							Library:tween(Dropdown["2c"], {BackgroundColor3 = Color3.fromRGB(10, 10, 30)})
 							Library:tween(Dropdown["2e"], {Color = Color3.fromRGB(55, 55, 134)})
 						else
-							Library:tween(Dropdown["2c"], {BackgroundColor3 = Color3.fromRGB(4, 4, 15)})
+							Library:tween(Dropdown["2c"], {BackgroundColor3 = Color3.fromRGB(10, 10, 30)})
 							Library:tween(Dropdown["2e"], {Color = Color3.fromRGB(27, 27, 66)})
 						end
 					end
