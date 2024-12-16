@@ -173,7 +173,7 @@ function Library:new(options)
 		GUI["d"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
 		GUI["d"]["ImageColor3"] = Color3.fromRGB(32, 32, 77);
 		GUI["d"]["Image"] = [[rbxassetid://89857762984221]];
-		GUI["d"]["Size"] = UDim2.new(0, 19, 0, 19);
+		GUI["d"]["Size"] = UDim2.new(0, 20, 0, 20);
 		GUI["d"]["BackgroundTransparency"] = 1;
 		GUI["d"]["Name"] = [[Exit1]];
 		GUI["d"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
@@ -187,11 +187,11 @@ function Library:new(options)
 		GUI["1e"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
 		GUI["1e"]["ImageColor3"] = Color3.fromRGB(32, 32, 77);
 		GUI["1e"]["Image"] = [[rbxassetid://75333583359777]];
-		GUI["1e"]["Size"] = UDim2.new(0, 17, 0, 17);
+		GUI["1e"]["Size"] = UDim2.new(0, 16, 0, 16);
 		GUI["1e"]["BackgroundTransparency"] = 1;
 		GUI["1e"]["Name"] = [[Minimize1]];
 		GUI["1e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-		GUI["1e"]["Position"] = UDim2.new(1, -44, 0, 6);
+		GUI["1e"]["Position"] = UDim2.new(1, -44, 0, 7);
 		GUI["1e"]["ZIndex"] = 5
 		
 		-- StarterGui.MyLibrary.Main.Contents
@@ -289,15 +289,17 @@ function Library:new(options)
 		UIS.InputBegan:Connect(function(input)
 			if input.UserInputType == Enum.UserInputType.MouseButton1 then
 				if GUI.Hover then
-					GUI.Dragging = true
-					GUI.StartDrag = input.Position
-					GUI.StartPos = GUI["6"].Parent["Position"]
-					
-					input.Changed:Connect(function()
-						if input.UserInputState == Enum.UserInputState.End then
-							GUI.Dragging = false
-						end
-					end)
+					if GUI["6"] and GUI["6"].Parent then
+						GUI.Dragging = true
+						GUI.StartDrag = input.Position
+						GUI.StartPos = GUI["6"].Parent["Position"]
+						
+						input.Changed:Connect(function()
+							if input.UserInputState == Enum.UserInputState.End then
+								GUI.Dragging = false
+							end
+						end)
+					end
 				end
 			end
 		end)
@@ -306,8 +308,10 @@ function Library:new(options)
 			if input.UserInputType == Enum.UserInputType.MouseMovement then
 				if GUI.Hover then
 					if GUI.Dragging then
-						local Delta = input.Position - GUI.StartDrag
-						GUI["6"].Parent["Position"] = UDim2.new(GUI.StartPos.X.Scale, GUI.StartPos.X.Offset + Delta.X, GUI.StartPos.Y.Scale, GUI.StartPos.Y.Offset + Delta.Y)
+						if GUI["6"] and GUI["6"].Parent then
+							local Delta = input.Position - GUI.StartDrag
+							GUI["6"].Parent["Position"] = UDim2.new(GUI.StartPos.X.Scale, GUI.StartPos.X.Offset + Delta.X, GUI.StartPos.Y.Scale, GUI.StartPos.Y.Offset + Delta.Y)
+						end
 					end
 				end
 			end
