@@ -44,7 +44,8 @@ function Library:new(options)
 		Hover2 = false,
 		Hover3 = false,
 		Done = false,
-		ToggleInactive = false
+		ToggleInactive = false,
+		InactiveTabs = {}
 	}
 	
 	-- Main Frame
@@ -342,6 +343,12 @@ function Library:new(options)
 							GUI.ToggleInactive = true
 						end
 						
+						if v.Name == "Inactive-MainTab" and v.BackgroundTransparency == 1 then
+							if v.TextColor3 ~= Color3.fromRGB(74, 74, 180) then
+								table.insert(GUI.InactiveTabs, v)
+							end
+						end
+						
 						if v.Name ~= GUI["6"].Name then
 							if v:IsA("Frame") then
 								Library:tween(v, {BackgroundTransparency = 1})
@@ -379,6 +386,11 @@ function Library:new(options)
 								if v.Name == "Inactive Option" then
 									Library:tween(v, {BackgroundTransparency = 0})
 								end
+								
+								for _, v in ipairs(GUI.InactiveTabs) do
+									Library:tween(v, {BackgroundTransparency = 1})
+								end
+
 								Library:tween(v, {TextTransparency = 0})
 							end
 
@@ -403,6 +415,7 @@ function Library:new(options)
 					end
 					GUI.Done = not GUI.Done
 					GUI.ToggleInactive = false
+					GUI.InactiveTabs = {}
 				end
 			end
 		end)
@@ -428,9 +441,29 @@ function Library:new(options)
 			if input.UserInputType == Enum.UserInputType.MouseButton1 then
 				if GUI.Hover3 then
 					for i, v in pairs(GUI["1"]:GetDescendants()) do
-						v:Destroy()
+						if v:IsA("Frame") then
+							Library:tween(v, {BackgroundTransparency = 1})
+						end
+
+						if v:IsA("TextLabel") then
+							Library:tween(v, {BackgroundTransparency = 1})
+							Library:tween(v, {TextTransparency = 1})
+						end
+
+						if v:IsA("ImageLabel") then
+							Library:tween(v, {ImageTransparency = 1})
+						end
+
+						if v:IsA("ImageButton") then
+							Library:tween(v, {BackgroundTransparency = 1})
+							Library:tween(v, {ImageTransparency = 1})
+						end
+						
+						if v:IsA("UIStroke") then
+							Library:tween(v, {Transparency = 1})
+						end
 					end
-					
+					task.wait(1)
 					GUI["1"]:Destroy()
 				end
 			end
