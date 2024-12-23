@@ -44,8 +44,9 @@ function Library:new(options)
 		Hover2 = false,
 		Hover3 = false,
 		Done = false,
-		ToggleInactive = false,
-		InactiveTabs = {}
+		InactiveTabs = {},
+		InactiveTabs2 = {},
+		InactiveContents = {}
 	}
 	
 	-- Main Frame
@@ -338,9 +339,15 @@ function Library:new(options)
 				if GUI.Hover2 and not GUI.Done then
 					Library:tween(GUI["6"], {Size = UDim2.new(0, 75, 0, 30)})
 					GUI["1e"]["Image"] = [[rbxassetid://83494634417832]]
-					for i, v in pairs(GUI["1"]:GetDescendants()) do
+					for _, v in ipairs(GUI["1c"]:GetChildren()) do
+						if v:IsA("ScrollingFrame") and v.Visible == false then
+							table.insert(GUI.InactiveContents, v)
+						end
+					end
+					
+					for _, v in ipairs(GUI["1"]:GetDescendants()) do
 						if v.Name == "Checkmark" and v.ImageTransparency == 1 then
-							GUI.ToggleInactive = true
+							table.insert(GUI.InactiveTabs2, v)
 						end
 						
 						if v.Name == "Inactive-MainTab" and v.BackgroundTransparency == 1 then
@@ -368,54 +375,76 @@ function Library:new(options)
 							end
 						end
 					end
-					GUI.Done = not GUI.Done
-				elseif GUI.Hover2 and GUI.Done then
-					Library:tween(GUI["6"], {Size = UDim2.new(1, 0, 0, 30)})
-					GUI["1e"]["Image"] = [[rbxassetid://75333583359777]]
-					for i, v in pairs(GUI["1"]:GetDescendants()) do
-						if v.Name ~= GUI["6"].Name and v.Name ~= "ButtonHolder" and v.Name ~= "Contents" and v.Name ~= "DropShadowHolder" and v.Name ~= "OptionHolder" then
-							if v:IsA("Frame") then
-								Library:tween(v, {BackgroundTransparency = 0})
-							end
-
-							if v:IsA("TextLabel") then
-								if v.Name == "Inactive-MainTab" then
-									Library:tween(v, {BackgroundTransparency = 0})
+					
+					for _, v in ipairs(GUI["2"]:GetChildren()) do
+						if v.Name ~= "TopBar" then
+							for _, v2 in ipairs(v:GetDescendants()) do
+								if v2:IsA("GuiObject") then
+									v2.Visible = false
 								end
-								
-								if v.Name == "Inactive Option" then
-									Library:tween(v, {BackgroundTransparency = 0})
-								end
-								
-								for _, v in ipairs(GUI.InactiveTabs) do
-									Library:tween(v, {BackgroundTransparency = 1})
-								end
-
-								Library:tween(v, {TextTransparency = 0})
-							end
-
-							if v:IsA("ImageLabel") then
-								if GUI.ToggleInactive then
-									if v.Name ~= "Checkmark" then
-										Library:tween(v, {ImageTransparency = 0})                     -- NEED TO FIX THIS PART OF THE SCRIPT!!!!!!!!!!!!!!!!!
-									end
-								else
-									Library:tween(v, {ImageTransparency = 0})
-								end
-							end
-							
-							if v:IsA("UIStroke") then
-								Library:tween(v, {Transparency = 0})
-							end
-							
-							if v.Name == "DropShadow" then
-								Library:tween(v, {ImageTransparency = 0.5})
 							end
 						end
 					end
 					GUI.Done = not GUI.Done
-					GUI.ToggleInactive = false
+				elseif GUI.Hover2 and GUI.Done then
+					for _, v in ipairs(GUI["2"]:GetChildren()) do
+						if v.Name ~= "TopBar" then
+							for _, v2 in ipairs(v:GetDescendants()) do
+								if v2:IsA("GuiObject") and v2.Name ~= "OptionHolder" then
+									if v2 ~= GUI.InactiveContents[1] then
+										v2.Visible = true
+									end
+								end
+							end
+						end
+					end
+					Library:tween(GUI["6"], {Size = UDim2.new(1, 0, 0, 30)})
+					GUI["1e"]["Image"] = [[rbxassetid://75333583359777]]
+					for _, v in ipairs(GUI["1"]:GetDescendants()) do
+						if v.Name ~= GUI["6"].Name and v.Name ~= "ButtonHolder" and v.Name ~= "Contents" then
+							if v.Name ~= "DropShadowHolder" and v.Name ~= "OptionHolder" then
+								if v:IsA("Frame") then
+									Library:tween(v, {BackgroundTransparency = 0})
+								end
+
+								if v:IsA("TextLabel") then
+									if v.Name == "Inactive-MainTab" then
+										Library:tween(v, {BackgroundTransparency = 0})
+									end
+									
+									if v.Name == "Inactive Option" then
+										Library:tween(v, {BackgroundTransparency = 0})
+									end
+									
+									for _, v in ipairs(GUI.InactiveTabs) do
+										Library:tween(v, {BackgroundTransparency = 1})
+									end
+
+									Library:tween(v, {TextTransparency = 0})
+								end
+
+								if v:IsA("ImageLabel") then
+									Library:tween(v, {ImageTransparency = 0})
+									
+									for _, v in ipairs(GUI.InactiveTabs2) do
+										Library:tween(v, {ImageTransparency = 1})
+									end
+								end
+								
+								if v:IsA("UIStroke") then
+									Library:tween(v, {Transparency = 0})
+								end
+								
+								if v.Name == "DropShadow" then
+									Library:tween(v, {ImageTransparency = 0.5})
+								end
+							end
+						end
+					end
+					GUI.Done = not GUI.Done
 					GUI.InactiveTabs = {}
+					GUI.InactiveTabs2 = {}
+					GUI.InactiveContents = {}
 				end
 			end
 		end)
@@ -468,7 +497,6 @@ function Library:new(options)
 				end
 			end
 		end)
-
 	end
 	
 	
@@ -481,7 +509,8 @@ function Library:new(options)
 		
 		local Tab = {
 			Hover = false,
-			Active = false
+			Active = false,
+			Test = false
 		}
 		
 		
@@ -561,8 +590,36 @@ function Library:new(options)
 				Library:tween(Tab["1a"], {ImageColor3 = Color3.fromRGB(74, 74, 180)})
 				Library:tween(Tab["18"], {BackgroundTransparency = 0})
 				Tab["1d"].Visible = true
+				task.wait(0.035)
+				for _, v in ipairs(Tab["1d"]:GetDescendants()) do
+					if v:IsA("Frame") then
+						if v.Name ~= "OptionHolder" then
+							Library:tween(v, {BackgroundTransparency = 0})
+						end
+					end
+
+					if v:IsA("TextLabel") then
+						if v.Name == "Inactive Option" then
+							Library:tween(v, {BackgroundTransparency = 0})
+						end
+						Library:tween(v, {TextTransparency = 0})
+					end
+
+					if v:IsA("ImageLabel") then
+						if Tab.Test == true then
+							Library:tween(v, {ImageTransparency = 0})
+						elseif v.Name ~= "Checkmark" then
+							Library:tween(v, {ImageTransparency = 0})
+						end
+					end
+
+					if v:IsA("UIStroke") then
+						Library:tween(v, {Transparency = 0})
+					end
+				end
 				
 				GUI.CurrentTab = Tab
+				Tab.Test = false
 			end
 			
 		end
@@ -570,6 +627,28 @@ function Library:new(options)
 		
 		function Tab:Deactivate()
 			if Tab.Active then
+				for _, v in ipairs(Tab["1d"]:GetDescendants()) do
+					if v.Name == "Checkmark" and v.ImageTransparency == 0 then
+						Tab.Test = true
+					end
+					if v:IsA("Frame") then
+						Library:tween(v, {BackgroundTransparency = 1})
+					end
+
+					if v:IsA("TextLabel") then
+						Library:tween(v, {BackgroundTransparency = 1})
+						Library:tween(v, {TextTransparency = 1})
+					end
+
+					if v:IsA("ImageLabel") then
+						Library:tween(v, {ImageTransparency = 1})
+					end
+
+					if v:IsA("UIStroke") then
+						Library:tween(v, {Transparency = 1})
+					end
+				end
+				task.wait(0.035)
 				Tab.Active = false
 				Tab.Hover = false
 				Library:tween(Tab["18"], {TextColor3 = Color3.fromRGB(32, 32, 77)})
@@ -828,7 +907,7 @@ function Library:new(options)
 
 				-- StarterGui.MyLibrary.Main.Contents.Main.Slider.SliderBack.UIStroke
 				Slider["44"] = Instance.new("UIStroke", Slider["43"]);
-				Slider["44"]["Color"] = Color3.fromRGB(14, 14, 32);
+				Slider["44"]["Color"] = Color3.fromRGB(27, 27, 66);
 
 
 				-- StarterGui.MyLibrary.Main.Contents.Main.Slider.SliderBack.Draggable
