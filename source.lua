@@ -46,6 +46,7 @@ function Library:new(options)
 		Done = false,
 		InactiveTabs = {},
 		InactiveTabs2 = {},
+		InactiveTabs3 = {},
 		InactiveContents = {}
 	}
 	
@@ -346,6 +347,12 @@ function Library:new(options)
 					end
 					
 					for _, v in ipairs(GUI["1"]:GetDescendants()) do
+						if v:IsA("ScrollingFrame") and v.Parent.Name == "Contents" then
+							if v.Name == "Main" and v.Visible == false then
+								table.insert(GUI.InactiveTabs3, v)
+							end
+						end
+						
 						if v.Name == "Checkmark" and v.ImageTransparency == 1 then
 							table.insert(GUI.InactiveTabs2, v)
 						end
@@ -404,6 +411,10 @@ function Library:new(options)
 						if v.Name ~= GUI["6"].Name and v.Name ~= "ButtonHolder" and v.Name ~= "Contents" then
 							if v.Name ~= "DropShadowHolder" and v.Name ~= "OptionHolder" then
 								if v:IsA("Frame") then
+									for _, v in ipairs(GUI.InactiveTabs3) do
+										v.Visible = false
+									end
+									
 									Library:tween(v, {BackgroundTransparency = 0})
 								end
 
@@ -444,6 +455,7 @@ function Library:new(options)
 					GUI.Done = not GUI.Done
 					GUI.InactiveTabs = {}
 					GUI.InactiveTabs2 = {}
+					GUI.InactiveTabs3 = {}
 					GUI.InactiveContents = {}
 				end
 			end
