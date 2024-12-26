@@ -43,6 +43,8 @@ function Library:new(options)
 		Hover = false,
 		Hover2 = false,
 		Hover3 = false,
+		Hover4 = false,
+		Minimized = false,
 		Done = false,
 		InactiveTabs = {},
 		InactiveTabs2 = {},
@@ -67,6 +69,7 @@ function Library:new(options)
 		GUI["2"]["Position"] = UDim2.fromOffset((Viewport.X/2) - (GUI["2"].Size.X.Offset / 2), (Viewport.Y/2) - (GUI["2"].Size.Y.Offset / 2));
 		GUI["2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 		GUI["2"]["Name"] = [[Main]];
+		GUI["2"]["ClipsDescendants"] = false;
 
 
 		-- StarterGui.MyLibrary.Main.UICorner
@@ -136,15 +139,15 @@ function Library:new(options)
 		-- StarterGui.MyLibrary.Main.TopBar.Shell
 		GUI["a"] = Instance.new("ImageLabel", GUI["6"]);
 		GUI["a"]["BorderSizePixel"] = 0;
-		GUI["a"]["BackgroundColor3"] = Color3.fromRGB(2, 6, 255);
+		GUI["a"]["BackgroundColor3"] = Color3.fromRGB(3, 7, 255);
 		GUI["a"]["ScaleType"] = Enum.ScaleType.Fit;
-		GUI["a"]["ImageColor3"] = Color3.fromRGB(76, 76, 182);
-		GUI["a"]["Image"] = [[rbxassetid://126678697203229]];
-		GUI["a"]["Size"] = UDim2.new(0, 18, 0, 18);
+		GUI["a"]["ImageColor3"] = Color3.fromRGB(33, 33, 78);
+		GUI["a"]["Image"] = [[rbxassetid://85648032090058]];
+		GUI["a"]["Size"] = UDim2.new(0, 20, 0, 20);
 		GUI["a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 		GUI["a"]["BackgroundTransparency"] = 1;
 		GUI["a"]["Name"] = [[Shell]];
-		GUI["a"]["Position"] = UDim2.new(0, 6, 0, 6);
+		GUI["a"]["Position"] = UDim2.new(0, 5, 0, 5);
 
 
 		-- StarterGui.MyLibrary.Main.TopBar.NAUTILUS
@@ -153,10 +156,11 @@ function Library:new(options)
 		GUI["b"]["LineHeight"] = 0;
 		GUI["b"]["BorderSizePixel"] = 0;
 		GUI["b"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+		GUI["b"]["TextTransparency"] = 0;
 		GUI["b"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
 		GUI["b"]["TextSize"] = 18;
 		GUI["b"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
-		GUI["b"]["TextColor3"] = Color3.fromRGB(63, 63, 150);
+		GUI["b"]["TextColor3"] = Color3.fromRGB(32, 32, 77);
 		GUI["b"]["BackgroundTransparency"] = 1;
 		GUI["b"]["Size"] = UDim2.new(0.5, 0, 1, 0);
 		GUI["b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
@@ -167,7 +171,7 @@ function Library:new(options)
 		-- StarterGui.MyLibrary.Main.TopBar.NAUTILUS.UIPadding
 		GUI["c"] = Instance.new("UIPadding", GUI["b"]);
 		GUI["c"]["PaddingTop"] = UDim.new(0, -2);
-		GUI["c"]["PaddingLeft"] = UDim.new(0, 29);
+		GUI["c"]["PaddingLeft"] = UDim.new(0, 28);
 
 
 		-- StarterGui.MyLibrary.Main.TopBar.Exit1
@@ -324,6 +328,39 @@ function Library:new(options)
 		
 		
 		
+		
+		
+		
+		-- For shell icon
+		GUI["a"].MouseEnter:Connect(function()
+			Library:tween(GUI["a"], {ImageColor3 = Color3.fromRGB(74, 74, 180)})
+			GUI.Hover4 = true
+			if GUI.Hover4 and not GUI.Minimized then
+				Library:tween(GUI["b"], {TextColor3 = Color3.fromRGB(74, 74, 180)})
+			end
+		end)
+
+		GUI["a"].MouseLeave:Connect(function()
+			GUI.Hover4 = false
+			Library:tween(GUI["a"], {ImageColor3 = Color3.fromRGB(32, 32, 77)})
+			Library:tween(GUI["b"], {TextColor3 = Color3.fromRGB(32, 32, 77)})
+		end)
+		
+		UIS.InputBegan:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseButton1 then
+				if GUI.Hover4 then
+					Library:tween(GUI["a"], {Rotation = -10})
+					task.wait(0.1)
+					Library:tween(GUI["a"], {Rotation = 0})
+				end
+			end
+		end)
+		
+		
+		
+		
+		
+		
 		-- For minimize button
 		GUI["1e"].MouseEnter:Connect(function()
 			Library:tween(GUI["1e"], {ImageColor3 = Color3.fromRGB(74, 74, 180)})
@@ -393,6 +430,7 @@ function Library:new(options)
 						end
 					end
 					GUI.Done = not GUI.Done
+					GUI.Minimized = true
 				elseif GUI.Hover2 and GUI.Done then
 					for _, v in ipairs(GUI["2"]:GetChildren()) do
 						if v.Name ~= "TopBar" then
@@ -452,6 +490,7 @@ function Library:new(options)
 							end
 						end
 					end
+					GUI.Minimized = false
 					GUI.Done = not GUI.Done
 					GUI.InactiveTabs = {}
 					GUI.InactiveTabs2 = {}
