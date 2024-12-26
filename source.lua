@@ -589,7 +589,6 @@ function Library:new(options)
 			Tab["25"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
 		end
 		
-		
 		-- Functions / methods
 		function Tab:Activate()
 			if not Tab.Active then
@@ -635,7 +634,6 @@ function Library:new(options)
 			end
 			
 		end
-		
 		
 		function Tab:Deactivate()
 			if Tab.Active then
@@ -706,7 +704,6 @@ function Library:new(options)
 				Tab:Activate()
 			end
 		end
-		
 		
 		function Tab:CreateButton(options)
 			options = Library:validate({
@@ -1467,6 +1464,202 @@ function Library:new(options)
 			
 			
 			return Dropdown
+		end
+		
+		function Tab:CreateKeybind(options)
+			options = Library:validate({
+				title = "Keybind",
+				callback = function() end
+			}, options or {})
+			
+			local Key = {
+				CurrentEnum = nil,
+				PreviousKey = nil,
+				Active = false,
+				Hover = false,
+				MouseDown = false
+			}
+			
+			-- Keybind Render
+			do
+				-- StarterGui.MyLibrary.Main.Contents.Main.Keybind
+				Key["35"] = Instance.new("Frame", Tab["1d"]);
+				Key["35"]["BorderSizePixel"] = 0;
+				Key["35"]["BackgroundColor3"] = Color3.fromRGB(11, 11, 31);
+				Key["35"]["Size"] = UDim2.new(1, 0, 0, 32);
+				Key["35"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+				Key["35"]["Name"] = [[Keybind]];
+
+
+				-- StarterGui.MyLibrary.Main.Contents.Main.Keybind.UICorner
+				Key["36"] = Instance.new("UICorner", Key["35"]);
+				Key["36"]["CornerRadius"] = UDim.new(0, 4);
+
+
+				-- StarterGui.MyLibrary.Main.Contents.Main.Keybind.UIStroke
+				Key["37"] = Instance.new("UIStroke", Key["35"]);
+				Key["37"]["Color"] = Color3.fromRGB(29, 29, 68);
+
+
+				-- StarterGui.MyLibrary.Main.Contents.Main.Keybind.Title
+				Key["38"] = Instance.new("TextLabel", Key["35"]);
+				Key["38"]["BorderSizePixel"] = 0;
+				Key["38"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+				Key["38"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+				Key["38"]["TextSize"] = 14;
+				Key["38"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+				Key["38"]["TextColor3"] = Color3.fromRGB(76, 76, 182);
+				Key["38"]["BackgroundTransparency"] = 1;
+				Key["38"]["Size"] = UDim2.new(1, -30, 1, 0);
+				Key["38"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+				Key["38"]["Text"] = [[Keybind]];
+				Key["38"]["Name"] = [[Title]];
+
+
+				-- StarterGui.MyLibrary.Main.Contents.Main.Keybind.UIPadding
+				Key["39"] = Instance.new("UIPadding", Key["35"]);
+				Key["39"]["PaddingTop"] = UDim.new(0, 6);
+				Key["39"]["PaddingRight"] = UDim.new(0, 6);
+				Key["39"]["PaddingLeft"] = UDim.new(0, 6);
+				Key["39"]["PaddingBottom"] = UDim.new(0, 6);
+
+
+				-- StarterGui.MyLibrary.Main.Contents.Main.Keybind.KeyHolder
+				Key["3a"] = Instance.new("Frame", Key["35"]);
+				Key["3a"]["Active"] = true;
+				Key["3a"]["BorderSizePixel"] = 0;
+				Key["3a"]["BackgroundColor3"] = Color3.fromRGB(11, 11, 31);
+				Key["3a"]["AnchorPoint"] = Vector2.new(1, 0.5);
+				Key["3a"]["Size"] = UDim2.new(0, 16, 0, 16);
+				Key["3a"]["Position"] = UDim2.new(1, -2, 0.5, 0);
+				Key["3a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+				Key["3a"]["Name"] = [[KeyHolder]];
+
+
+				-- StarterGui.MyLibrary.Main.Contents.Main.Keybind.KeyHolder.UICorner
+				Key["3b"] = Instance.new("UICorner", Key["3a"]);
+				Key["3b"]["CornerRadius"] = UDim.new(0, 3);
+
+
+				-- StarterGui.MyLibrary.Main.Contents.Main.Keybind.KeyHolder.UIStroke
+				Key["3c"] = Instance.new("UIStroke", Key["3a"]);
+				Key["3c"]["Color"] = Color3.fromRGB(29, 29, 68);
+
+
+				-- StarterGui.MyLibrary.Main.Contents.Main.Keybind.KeyHolder.TextBox
+				Key["3d"] = Instance.new("TextBox", Key["3a"]);
+				Key["3d"]["CursorPosition"] = -1;
+				Key["3d"]["TextColor3"] = Color3.fromRGB(28, 28, 67);
+				Key["3d"]["PlaceholderColor3"] = Color3.fromRGB(28, 28, 67);
+				Key["3d"]["BorderSizePixel"] = 0;
+				Key["3d"]["TextSize"] = 14;
+				Key["3d"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+				Key["3d"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Medium, Enum.FontStyle.Normal);
+				Key["3d"]["Size"] = UDim2.new(1, 0, 1, 0);
+				Key["3d"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+				Key["3d"]["Text"] = [[E]];
+				Key["3d"]["BackgroundTransparency"] = 1;
+			end
+			
+			-- Keybind Functions / methods
+			function Key:ChooseKeybind(current)
+				Key.CurrentEnum = current
+			end
+			
+			function Key:Toggle(b)
+				if b == nil then
+					Key.Active = not Key.Active
+				else
+					Key.Active = b
+				end
+				
+				if Key.Active then
+					Library:tween(Key["3c"], {Color = Color3.fromRGB(50, 50, 120)})
+					Library:tween(Key["3d"], {TextColor3 = Color3.fromRGB(75, 75, 181)})
+					
+				else
+					Library:tween(Key["3c"], {Color = Color3.fromRGB(29, 29, 68)})
+					Library:tween(Key["3d"], {TextColor3 = Color3.fromRGB(28, 28, 67)})
+				end
+			end
+			
+			-- Keybind Logic
+			do
+				-- For the effects / toggle
+				Key["35"].MouseEnter:Connect(function()
+					Key.Hover = true
+					Library:tween(Key["37"], {Color = Color3.fromRGB(55, 55, 134)})
+				end)
+
+				Key["35"].MouseLeave:Connect(function()
+					Key.Hover = false
+					if not Key.MouseDown then
+						Library:tween(Key["37"], {Color = Color3.fromRGB(28, 28, 67)})
+					end
+				end)
+
+				UIS.InputBegan:Connect(function(input, gpe)
+					if gpe then return end
+
+					if input.UserInputType == Enum.UserInputType.MouseButton1 and Key.Hover then
+						Key.MouseDown = true
+						Library:tween(Key["35"], {BackgroundColor3 = Color3.fromRGB(15, 15, 57)})
+						Library:tween(Key["37"], {Color = Color3.fromRGB(55, 55, 134)})
+						Key:Toggle()
+					end
+				end)
+
+				UIS.InputEnded:Connect(function(input, gpe)
+					if gpe then return end
+
+					if input.UserInputType == Enum.UserInputType.MouseButton1 then
+						Key.MouseDown = false
+						if Key.Hover then
+							Library:tween(Key["35"], {BackgroundColor3 = Color3.fromRGB(10, 10, 30)})
+							Library:tween(Key["37"], {Color = Color3.fromRGB(55, 55, 134)})
+
+						else
+							Library:tween(Key["35"], {BackgroundColor3 = Color3.fromRGB(10, 10, 30)})
+							Library:tween(Key["37"], {Color = Color3.fromRGB(28, 28, 67)})
+						end
+					end
+				end)
+
+
+				-- For the keybind text / letter
+				UIS.InputBegan:Connect(function(key, gpe)
+					if gpe then return end
+					
+					local function GetKeyCode(text)
+						return Enum.KeyCode[text]
+					end
+					
+					if key.UserInputType == Enum.UserInputType.Keyboard then
+						local Keybind = GetKeyCode(Key["3d"]["Text"])
+						if key.KeyCode == Keybind and Key.Active then
+							Key.PreviousKey = Key["3d"]["Text"]
+							Key:ChooseKeybind(Keybind)
+							options.callback(Key.CurrentEnum)
+						end
+					end
+				end)
+				
+				Key["3d"]:GetPropertyChangedSignal("Text"):Connect(function()
+					Key["3d"]["Text"] = string.upper(Key["3d"]["Text"])
+					
+					if #Key["3d"]["Text"] == 1 then
+						Key["3d"]:ReleaseFocus()
+					end
+					
+					Key["3d"].FocusLost:Connect(function()
+						if Key["3d"]["Text"] == "" then
+							Key["3d"]["Text"] = Key.PreviousKey
+						end
+					end)
+				end)
+			end
+			
+			return Key
 		end
 		
 		
