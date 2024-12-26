@@ -8,7 +8,7 @@ Nautilus is a free UI library, here's what it offers so far:
   
   [+] Sliders
   
-  [+] Dropdown
+  [+] Dropdowns
   
   [+] Keybinds
   
