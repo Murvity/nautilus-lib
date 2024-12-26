@@ -326,7 +326,7 @@ function Library:new(options)
 		
 		-- For minimize button
 		GUI["1e"].MouseEnter:Connect(function()
-			Library:tween(GUI["1e"], {ImageColor3 = Color3.fromRGB(55, 55, 134)})
+			Library:tween(GUI["1e"], {ImageColor3 = Color3.fromRGB(74, 74, 180)})
 			GUI.Hover2 = true
 		end)
 
@@ -469,7 +469,7 @@ function Library:new(options)
 		
 		-- For exiting
 		GUI["d"].MouseEnter:Connect(function()
-			Library:tween(GUI["d"], {ImageColor3 = Color3.fromRGB(55, 55, 134)})
+			Library:tween(GUI["d"], {ImageColor3 = Color3.fromRGB(74, 74, 180)})
 			GUI.Hover3 = true
 		end)
 
