@@ -1685,16 +1685,21 @@ function Library:new(options)
 				Key["3d"]:GetPropertyChangedSignal("Text"):Connect(function()
 					Key["3d"]["Text"] = string.upper(Key["3d"]["Text"])
 					
-					if #Key["3d"]["Text"] == 1 and not Key["3d"]["Text"]:match("^%s*$") then
+					if Key["3d"]["Text"]:match("%a") and not Key["3d"]["Text"]:match("^%s*$") then
 						Key.CurrentKey = Key["3d"]["Text"]
 						Key["3d"]:ReleaseFocus()
 					end
-					
+
 					Key["3d"].FocusLost:Connect(function()
 						if Key["3d"]["Text"] == "" or #Key["3d"]["Text"] == 0 then
 							Key["3d"]["Text"] = Key.CurrentKey
 						elseif Key["3d"]["Text"]:match("^%s*$") then
 							Key["3d"]["Text"] = Key.CurrentKey
+						end
+						
+						if Key["3d"]["Text"]:match("%s") then
+							local newString = string.gsub(Key["3d"]["Text"], "%s", "")
+							Key["3d"]["Text"] = newString
 						end
 					end)
 				end)
