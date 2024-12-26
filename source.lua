@@ -1637,7 +1637,6 @@ function Library:new(options)
 					if key.UserInputType == Enum.UserInputType.Keyboard then
 						local Keybind = GetKeyCode(Key["3d"]["Text"])
 						if key.KeyCode == Keybind and Key.Active then
-							Key.PreviousKey = Key["3d"]["Text"]
 							Key:ChooseKeybind(Keybind)
 							options.callback(Key.CurrentEnum)
 						end
@@ -1648,11 +1647,12 @@ function Library:new(options)
 					Key["3d"]["Text"] = string.upper(Key["3d"]["Text"])
 					
 					if #Key["3d"]["Text"] == 1 then
+						Key.PreviousKey = Key["3d"]["Text"]
 						Key["3d"]:ReleaseFocus()
 					end
 					
 					Key["3d"].FocusLost:Connect(function()
-						if Key["3d"]["Text"] == "" then
+						if Key["3d"]["Text"] == "" or #Key["3d"]["Text"] == 0 then
 							Key["3d"]["Text"] = Key.PreviousKey
 						end
 					end)
