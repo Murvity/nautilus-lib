@@ -83,4 +83,13 @@ Adding/destroying dropdown buttons:
     dropdown:Add("Title", value)
     dropdown:Remove("Title")
 
-    
+------------------------------------------------------
+
+Creating a keybind:
+
+    keybind = tab:CreateKeybind({
+        title = "Keybind",
+        callback = function()
+            print("Hello!")
+        end
+    })
