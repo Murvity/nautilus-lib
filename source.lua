@@ -1474,7 +1474,7 @@ function Library:new(options)
 			
 			local Key = {
 				CurrentEnum = nil,
-				PreviousKey = nil,
+				CurrentKey = nil,
 				Active = false,
 				Hover = false,
 				MouseDown = false
@@ -1646,14 +1646,16 @@ function Library:new(options)
 				Key["3d"]:GetPropertyChangedSignal("Text"):Connect(function()
 					Key["3d"]["Text"] = string.upper(Key["3d"]["Text"])
 					
-					if #Key["3d"]["Text"] == 1 then
-						Key.PreviousKey = Key["3d"]["Text"]
+					if #Key["3d"]["Text"] == 1 and not Key["3d"]["Text"]:match("^%s*$") then
+						Key.CurrentKey = Key["3d"]["Text"]
 						Key["3d"]:ReleaseFocus()
 					end
 					
 					Key["3d"].FocusLost:Connect(function()
 						if Key["3d"]["Text"] == "" or #Key["3d"]["Text"] == 0 then
-							Key["3d"]["Text"] = Key.PreviousKey
+							Key["3d"]["Text"] = Key.CurrentKey
+						elseif Key["3d"]["Text"]:match("^%s*$") then
+							Key["3d"]["Text"] = Key.CurrentKey
 						end
 					end)
 				end)
@@ -1661,7 +1663,6 @@ function Library:new(options)
 			
 			return Key
 		end
-		
 		
 		return Tab
 	end
