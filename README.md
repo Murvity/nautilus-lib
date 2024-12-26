@@ -3,12 +3,10 @@ Nautilus is a free UI library, here's what it offers so far:
 
 
   [+] Buttons
-
   [+] Toggles
-
   [+] Sliders
-
   [+] Dropdown
+  [+] Keybinds
   
   ------------------------------------------------------
 
