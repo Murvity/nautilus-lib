@@ -1562,7 +1562,7 @@ function Library:new(options)
 			end
 			
 			-- Keybind Functions / methods
-			function Key:ChooseKeybind(current)
+			function Key:CurrentEnumKeybind(current)
 				Key.CurrentEnum = current
 			end
 			
@@ -1637,7 +1637,7 @@ function Library:new(options)
 					if key.UserInputType == Enum.UserInputType.Keyboard then
 						local Keybind = GetKeyCode(Key["3d"]["Text"])
 						if key.KeyCode == Keybind and Key.Active then
-							Key:ChooseKeybind(Keybind)
+							Key:CurrentEnumKeybind(Keybind)
 							options.callback(Key.CurrentEnum)
 						end
 					end
