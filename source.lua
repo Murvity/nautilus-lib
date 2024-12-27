@@ -573,7 +573,7 @@ function Library:new(options)
 		local Tab = {
 			Hover = false,
 			Active = false,
-			Test = false
+			ActiveToggles = {}
 		}
 		
 		
@@ -668,10 +668,12 @@ function Library:new(options)
 					end
 
 					if v:IsA("ImageLabel") then
-						if Tab.Test == true then
-							Library:tween(v, {ImageTransparency = 0})
-						elseif v.Name ~= "Checkmark" then
-							Library:tween(v, {ImageTransparency = 0})
+						for _, v2 in ipairs(Tab.ActiveToggles) do
+							if v2 == v then
+								Library:tween(v, {ImageTransparency = 0})
+							elseif v.Name ~= "Checkmark" then
+								Library:tween(v, {ImageTransparency = 0})
+							end
 						end
 					end
 
@@ -685,7 +687,7 @@ function Library:new(options)
 				end
 				
 				GUI.CurrentTab = Tab
-				Tab.Test = false
+				Tab.ActiveToggles = {}
 			end
 			
 		end
@@ -694,7 +696,7 @@ function Library:new(options)
 			if Tab.Active then
 				for _, v in ipairs(Tab["1d"]:GetDescendants()) do
 					if v.Name == "Checkmark" and v.ImageTransparency == 0 then
-						Tab.Test = true
+						table.insert(Tab.ActiveToggles, v)
 					end
 					if v:IsA("Frame") then
 						Library:tween(v, {BackgroundTransparency = 1})
