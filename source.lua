@@ -1751,7 +1751,7 @@ function Library:new(options)
 				Selection["16"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
 				Selection["16"]["TextColor3"] = Color3.fromRGB(77, 77, 183);
 				Selection["16"]["BackgroundTransparency"] = 1;
-				Selection["16"]["Size"] = UDim2.new(1, -30, 1, 0);
+				Selection["16"]["Size"] = UDim2.new(1, -200, 1, 0);
 				Selection["16"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 				Selection["16"]["Text"] = options.title;
 				Selection["16"]["Name"] = [[Title]];
