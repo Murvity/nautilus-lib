@@ -11,6 +11,8 @@ Nautilus is a free UI library, here's what it offers so far:
   [+] Dropdowns
   
   [+] Keybinds
+
+  [+] Selections
   
   ------------------------------------------------------
 
@@ -93,3 +95,15 @@ Creating a keybind:
             print("Hello!")
         end
     })
+
+------------------------------------------------------
+
+Creating a selection:
+
+    selection = tab:CreateSelection({
+        title = "Selection",
+        callback = function(v)
+            var = v
+        end
+    })
+
