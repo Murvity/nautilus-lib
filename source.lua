@@ -841,7 +841,7 @@ function Library:new(options)
 
 					if input.UserInputType == Enum.UserInputType.MouseButton1 and Button.Hover then
 						Button.MouseDown = true
-						Library:tween(Button["1e"], {BackgroundColor3 = Color3.fromRGB(15, 15, 57)})
+						Library:tween(Button["1e"], {BackgroundColor3 = Color3.fromRGB(10, 10, 30)})
 						Library:tween(Button["20"], {Color = Color3.fromRGB(55, 55, 134)})
 						options.callback()
 					end
@@ -1019,7 +1019,7 @@ function Library:new(options)
 
 					if input.UserInputType == Enum.UserInputType.MouseButton1 and Slider.Hover then
 						Slider.MouseDown = true
-						Library:tween(Slider["3d"], {BackgroundColor3 = Color3.fromRGB(15, 15, 57)})
+						Library:tween(Slider["3d"], {BackgroundColor3 = Color3.fromRGB(10, 10, 30)})
 						Library:tween(Slider["3f"], {Color = Color3.fromRGB(55, 55, 134)})
 						Library:tween(Slider["44"], {Color = Color3.fromRGB(55, 55, 134)})
 						Library:tween(Slider["45"], {BackgroundColor3 = Color3.fromRGB(55, 55, 134)})
@@ -1190,7 +1190,7 @@ function Library:new(options)
 
 					if input.UserInputType == Enum.UserInputType.MouseButton1 and Toggle.Hover then
 						Toggle.MouseDown = true
-						Library:tween(Toggle["51"], {BackgroundColor3 = Color3.fromRGB(15, 15, 57)})
+						Library:tween(Toggle["51"], {BackgroundColor3 = Color3.fromRGB(10, 10, 30)})
 						Library:tween(Toggle["53"], {Color = Color3.fromRGB(55, 55, 134)})
 						Toggle:Toggle()
 					end
@@ -1381,7 +1381,7 @@ function Library:new(options)
 
 					if input.UserInputType == Enum.UserInputType.MouseButton1 and Item.Hover then
 						Item.MouseDown = true
-						Library:tween(Dropdown.Items[id].Instance["37"], {BackgroundColor3 = Color3.fromRGB(15, 15, 57)})
+						Library:tween(Dropdown.Items[id].Instance["37"], {BackgroundColor3 = Color3.fromRGB(10, 10, 30)})
 						Library:tween(Dropdown.Items[id].Instance["38"], {Color = Color3.fromRGB(55, 55, 134)})
 						options.callback(value)
 						Dropdown:Toggle()
@@ -1476,7 +1476,7 @@ function Library:new(options)
 
 					if input.UserInputType == Enum.UserInputType.MouseButton1 and Dropdown.Hover then
 						Dropdown.MouseDown = true
-						Library:tween(Dropdown["2c"], {BackgroundColor3 = Color3.fromRGB(15, 15, 57)})
+						Library:tween(Dropdown["2c"], {BackgroundColor3 = Color3.fromRGB(10, 10, 30)})
 						Library:tween(Dropdown["2e"], {Color = Color3.fromRGB(55, 55, 134)})
 						
 						if not Dropdown.HoveringItem then
@@ -1551,7 +1551,7 @@ function Library:new(options)
 				Key["38"]["BackgroundTransparency"] = 1;
 				Key["38"]["Size"] = UDim2.new(1, -30, 1, 0);
 				Key["38"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-				Key["38"]["Text"] = [[Keybind]];
+				Key["38"]["Text"] = options.title;
 				Key["38"]["Name"] = [[Title]];
 
 
@@ -1568,6 +1568,7 @@ function Library:new(options)
 				Key["3a"]["Active"] = true;
 				Key["3a"]["BorderSizePixel"] = 0;
 				Key["3a"]["BackgroundColor3"] = Color3.fromRGB(11, 11, 31);
+				Key["3a"]["BackgroundTransparency"] = 1
 				Key["3a"]["AnchorPoint"] = Vector2.new(1, 0.5);
 				Key["3a"]["Size"] = UDim2.new(0, 16, 0, 16);
 				Key["3a"]["Position"] = UDim2.new(1, -2, 0.5, 0);
@@ -1642,7 +1643,7 @@ function Library:new(options)
 
 					if input.UserInputType == Enum.UserInputType.MouseButton1 and Key.Hover then
 						Key.MouseDown = true
-						Library:tween(Key["35"], {BackgroundColor3 = Color3.fromRGB(15, 15, 57)})
+						Library:tween(Key["35"], {BackgroundColor3 = Color3.fromRGB(10, 10, 30)})
 						Library:tween(Key["37"], {Color = Color3.fromRGB(55, 55, 134)})
 						Key:Toggle()
 					end
@@ -1708,11 +1709,202 @@ function Library:new(options)
 			return Key
 		end
 		
+		function Tab:CreateSelection(options)
+			options = Library:validate({
+				title = "Selection",
+				callback = function() end
+			}, options or {})
+			
+			local Selection = {
+				Hover = false,
+				MouseDown = false,
+				CurrentSelection = nil
+			}
+			
+			-- Selection Render
+			do
+				-- StarterGui.MyLibrary.Main.Contents.Main.Selection
+				Selection["13"] = Instance.new("Frame", Tab["1d"]);
+				Selection["13"]["BorderSizePixel"] = 0;
+				Selection["13"]["BackgroundColor3"] = Color3.fromRGB(12, 12, 32);
+				Selection["13"]["Size"] = UDim2.new(1, 0, 0, 32);
+				Selection["13"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+				Selection["13"]["Name"] = [[Selection]];
+
+
+				-- StarterGui.MyLibrary.Main.Contents.Main.Selection.UICorner
+				Selection["14"] = Instance.new("UICorner", Selection["13"]);
+				Selection["14"]["CornerRadius"] = UDim.new(0, 4);
+
+
+				-- StarterGui.MyLibrary.Main.Contents.Main.Selection.UIStroke
+				Selection["15"] = Instance.new("UIStroke", Selection["13"]);
+				Selection["15"]["Color"] = Color3.fromRGB(29, 29, 68);
+
+
+				-- StarterGui.MyLibrary.Main.Contents.Main.Selection.Title
+				Selection["16"] = Instance.new("TextLabel", Selection["13"]);
+				Selection["16"]["BorderSizePixel"] = 0;
+				Selection["16"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+				Selection["16"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+				Selection["16"]["TextSize"] = 14;
+				Selection["16"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+				Selection["16"]["TextColor3"] = Color3.fromRGB(77, 77, 183);
+				Selection["16"]["BackgroundTransparency"] = 1;
+				Selection["16"]["Size"] = UDim2.new(1, -30, 1, 0);
+				Selection["16"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+				Selection["16"]["Text"] = options.title;
+				Selection["16"]["Name"] = [[Title]];
+
+
+				-- StarterGui.MyLibrary.Main.Contents.Main.Selection.UIPadding
+				Selection["17"] = Instance.new("UIPadding", Selection["13"]);
+				Selection["17"]["PaddingTop"] = UDim.new(0, 6);
+				Selection["17"]["PaddingRight"] = UDim.new(0, 6);
+				Selection["17"]["PaddingLeft"] = UDim.new(0, 6);
+				Selection["17"]["PaddingBottom"] = UDim.new(0, 6);
+
+
+				-- StarterGui.MyLibrary.Main.Contents.Main.Selection.Selector
+				Selection["18"] = Instance.new("Frame", Selection["13"]);
+				Selection["18"]["Active"] = true;
+				Selection["18"]["BorderSizePixel"] = 0;
+				Selection["18"]["BackgroundColor3"] = Color3.fromRGB(12, 12, 32);
+				Selection["18"]["AnchorPoint"] = Vector2.new(1, 0.5);
+				Selection["18"]["Size"] = UDim2.new(0, 42, 0, 16);
+				Selection["18"]["Position"] = UDim2.new(1, -2, 0.5, 0);
+				Selection["18"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+				Selection["18"]["Name"] = [[Selector]];
+
+
+				-- StarterGui.MyLibrary.Main.Contents.Main.Selection.Selector.UICorner
+				Selection["19"] = Instance.new("UICorner", Selection["18"]);
+				Selection["19"]["CornerRadius"] = UDim.new(0, 3);
+
+
+				-- StarterGui.MyLibrary.Main.Contents.Main.Selection.Selector.UIStroke
+				Selection["1a"] = Instance.new("UIStroke", Selection["18"]);
+				Selection["1a"]["Color"] = Color3.fromRGB(30, 30, 69);
+
+
+				-- StarterGui.MyLibrary.Main.Contents.Main.Selection.Selector.TextBox
+				Selection["1b"] = Instance.new("TextBox", Selection["18"]);
+				Selection["1b"]["TextColor3"] = Color3.fromRGB(30, 30, 69);
+				Selection["1b"]["PlaceholderColor3"] = Color3.fromRGB(29, 29, 68);
+				Selection["1b"]["BorderSizePixel"] = 0;
+				Selection["1b"]["TextSize"] = 14;
+				Selection["1b"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+				Selection["1b"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Medium, Enum.FontStyle.Normal);
+				Selection["1b"]["Size"] = UDim2.new(1, 0, 1, 0);
+				Selection["1b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+				Selection["1b"]["Text"] = [[Input]];
+				Selection["1b"]["BackgroundTransparency"] = 1;
+				Selection["1b"]["TextXAlignment"] = [[Center]]
+				
+				-- StarterGui.MyLibrary.Main.Contents.Main.Selection.Selector.TextBox.UIPadding
+				Selection["1c"] = Instance.new("UIPadding", Selection["1b"]);
+				Selection["1c"]["PaddingTop"] = UDim.new(0, -1);
+				Selection["1c"]["PaddingLeft"] = UDim.new(0, 0);
+			end
+			
+			-- Selection Functions / methods
+			function Selection:Placeholder()
+				
+			end
+			
+			
+			
+			
+			
+			
+			-- Selection Logic
+			do
+				-- For the basic hover / click effects
+				Selection["13"].MouseEnter:Connect(function()
+					Selection.Hover = true
+					Library:tween(Selection["15"], {Color = Color3.fromRGB(55, 55, 134)})
+				end)
+
+				Selection["13"].MouseLeave:Connect(function()
+					Selection.Hover = false
+					if not Selection.MouseDown then
+					Library:tween(Selection["15"], {Color = Color3.fromRGB(28, 28, 67)})
+					end
+				end)
+
+				UIS.InputBegan:Connect(function(input, gpe)
+					if gpe then return end
+
+					if input.UserInputType == Enum.UserInputType.MouseButton1 and Selection.Hover then
+						Selection.MouseDown = true
+						Library:tween(Selection["13"], {BackgroundColor3 = Color3.fromRGB(10, 10, 30)})
+						Library:tween(Selection["15"], {Color = Color3.fromRGB(55, 55, 134)})
+						options.callback(Selection.CurrentSelection)
+					end
+				end)
+
+				UIS.InputEnded:Connect(function(input, gpe)
+					if gpe then return end
+
+					if input.UserInputType == Enum.UserInputType.MouseButton1 then
+						Selection.MouseDown = false
+						if Selection.Hover then
+							Library:tween(Selection["13"], {BackgroundColor3 = Color3.fromRGB(10, 10, 30)})
+							Library:tween(Selection["15"], {Color = Color3.fromRGB(55, 55, 134)})
+						else
+							Library:tween(Selection["13"], {BackgroundColor3 = Color3.fromRGB(10, 10, 30)})
+							Library:tween(Selection["15"], {Color = Color3.fromRGB(28, 28, 67)})
+						end
+					end
+				end)
+				
+				
+				
+				
+				
+				-- For the textbox effects
+				Selection["1b"]:GetPropertyChangedSignal("Text"):Connect(function()
+					local Length = #Selection["1b"]["Text"]
+					local New_Width = Length * 8
+					
+					
+					Library:tween(Selection["1b"], {TextColor3 = Color3.fromRGB(50, 50, 120)})
+					Library:tween(Selection["1a"], {Color = Color3.fromRGB(50, 50, 120)})
+					
+					if Length >= 6 then
+						Selection["18"]["Size"] = UDim2.new(0, New_Width, Selection["18"]["Size"].Y.Scale, Selection["18"]["Size"].Y.Offset)
+					else
+						Selection["18"]["Size"] = UDim2.new(0, 42, 0, 16)
+					end
+					
+					Selection["1b"].FocusLost:Connect(function()
+						Library:tween(Selection["1b"], {TextColor3 = Color3.fromRGB(30, 30, 69)})
+						Library:tween(Selection["1a"], {Color = Color3.fromRGB(30, 30, 69)})
+						if not Selection["1b"]["Text"]:match("%S") then
+							Selection["1b"]["Text"] = [[Input]]
+						else
+							Selection.CurrentSelection = Selection["1b"]["Text"]
+						end
+					end)
+				end)
+				
+				
+			end
+			
+			
+			
+			
+			
+			
+			return Selection
+		end
+		
 		return Tab
 	end
 	
 	return GUI
 end
+
 
 local Nautilus = Library:new()
 return Nautilus
