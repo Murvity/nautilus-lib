@@ -417,6 +417,10 @@ function Library:new(options)
 							if v:IsA("UIStroke") then
 								Library:tween(v, {Transparency = 1})
 							end
+							
+							if v:IsA("TextBox") then
+								Library:tween(v, {TextTransparency = 1})
+							end
 						end
 					end
 					
@@ -484,6 +488,10 @@ function Library:new(options)
 									Library:tween(v, {Transparency = 0})
 								end
 								
+								if v:IsA("TextBox") then
+									Library:tween(v, {TextTransparency = 0})
+								end
+								
 								if v.Name == "DropShadow" then
 									Library:tween(v, {ImageTransparency = 0.5})
 								end
@@ -541,6 +549,10 @@ function Library:new(options)
 						
 						if v:IsA("UIStroke") then
 							Library:tween(v, {Transparency = 1})
+						end
+						
+						if v:IsA("TextBox") then
+							Library:tween(v, {TextTransparency = 1})
 						end
 					end
 					task.wait(1)
@@ -666,6 +678,10 @@ function Library:new(options)
 					if v:IsA("UIStroke") then
 						Library:tween(v, {Transparency = 0})
 					end
+					
+					if v:IsA("TextBox") then
+						Library:tween(v, {TextTransparency = 0})
+					end
 				end
 				
 				GUI.CurrentTab = Tab
@@ -695,6 +711,10 @@ function Library:new(options)
 
 					if v:IsA("UIStroke") then
 						Library:tween(v, {Transparency = 1})
+					end
+					
+					if v:IsA("TextBox") then
+						Library:tween(v, {TextTransparency = 1})
 					end
 				end
 				task.wait(0.035)
@@ -841,7 +861,7 @@ function Library:new(options)
 
 					if input.UserInputType == Enum.UserInputType.MouseButton1 and Button.Hover then
 						Button.MouseDown = true
-						Library:tween(Button["1e"], {BackgroundColor3 = Color3.fromRGB(10, 10, 30)})
+						Library:tween(Button["1e"], {BackgroundColor3 = Color3.fromRGB(28, 28, 67)})
 						Library:tween(Button["20"], {Color = Color3.fromRGB(55, 55, 134)})
 						options.callback()
 					end
@@ -1019,7 +1039,7 @@ function Library:new(options)
 
 					if input.UserInputType == Enum.UserInputType.MouseButton1 and Slider.Hover then
 						Slider.MouseDown = true
-						Library:tween(Slider["3d"], {BackgroundColor3 = Color3.fromRGB(10, 10, 30)})
+						Library:tween(Slider["3d"], {BackgroundColor3 = Color3.fromRGB(28, 28, 67)})
 						Library:tween(Slider["3f"], {Color = Color3.fromRGB(55, 55, 134)})
 						Library:tween(Slider["44"], {Color = Color3.fromRGB(55, 55, 134)})
 						Library:tween(Slider["45"], {BackgroundColor3 = Color3.fromRGB(55, 55, 134)})
@@ -1190,7 +1210,7 @@ function Library:new(options)
 
 					if input.UserInputType == Enum.UserInputType.MouseButton1 and Toggle.Hover then
 						Toggle.MouseDown = true
-						Library:tween(Toggle["51"], {BackgroundColor3 = Color3.fromRGB(10, 10, 30)})
+						Library:tween(Toggle["51"], {BackgroundColor3 = Color3.fromRGB(28, 28, 67)})
 						Library:tween(Toggle["53"], {Color = Color3.fromRGB(55, 55, 134)})
 						Toggle:Toggle()
 					end
@@ -1381,7 +1401,7 @@ function Library:new(options)
 
 					if input.UserInputType == Enum.UserInputType.MouseButton1 and Item.Hover then
 						Item.MouseDown = true
-						Library:tween(Dropdown.Items[id].Instance["37"], {BackgroundColor3 = Color3.fromRGB(10, 10, 30)})
+						Library:tween(Dropdown.Items[id].Instance["37"], {BackgroundColor3 = Color3.fromRGB(28, 28, 67)})
 						Library:tween(Dropdown.Items[id].Instance["38"], {Color = Color3.fromRGB(55, 55, 134)})
 						options.callback(value)
 						Dropdown:Toggle()
@@ -1476,7 +1496,7 @@ function Library:new(options)
 
 					if input.UserInputType == Enum.UserInputType.MouseButton1 and Dropdown.Hover then
 						Dropdown.MouseDown = true
-						Library:tween(Dropdown["2c"], {BackgroundColor3 = Color3.fromRGB(10, 10, 30)})
+						Library:tween(Dropdown["2c"], {BackgroundColor3 = Color3.fromRGB(28, 28, 67)})
 						Library:tween(Dropdown["2e"], {Color = Color3.fromRGB(55, 55, 134)})
 						
 						if not Dropdown.HoveringItem then
@@ -1643,7 +1663,7 @@ function Library:new(options)
 
 					if input.UserInputType == Enum.UserInputType.MouseButton1 and Key.Hover then
 						Key.MouseDown = true
-						Library:tween(Key["35"], {BackgroundColor3 = Color3.fromRGB(10, 10, 30)})
+						Library:tween(Key["35"], {BackgroundColor3 = Color3.fromRGB(28, 28, 67)})
 						Library:tween(Key["37"], {Color = Color3.fromRGB(55, 55, 134)})
 						Key:Toggle()
 					end
@@ -1806,13 +1826,7 @@ function Library:new(options)
 				Selection["1c"]["PaddingTop"] = UDim.new(0, -1);
 				Selection["1c"]["PaddingLeft"] = UDim.new(0, 0);
 			end
-			
-			-- Selection Functions / methods
-			function Selection:Placeholder()
-				
-			end
-			
-			
+		
 			
 			
 			
@@ -1837,7 +1851,7 @@ function Library:new(options)
 
 					if input.UserInputType == Enum.UserInputType.MouseButton1 and Selection.Hover then
 						Selection.MouseDown = true
-						Library:tween(Selection["13"], {BackgroundColor3 = Color3.fromRGB(10, 10, 30)})
+						Library:tween(Selection["13"], {BackgroundColor3 = Color3.fromRGB(28, 28, 67)})
 						Library:tween(Selection["15"], {Color = Color3.fromRGB(55, 55, 134)})
 						options.callback(Selection.CurrentSelection)
 					end
