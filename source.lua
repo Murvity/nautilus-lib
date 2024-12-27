@@ -559,7 +559,7 @@ function Library:new(options)
 					GUI["1"]:Destroy()
 				end
 			end
-		end)
+		end)	
 	end
 	
 	
@@ -646,28 +646,33 @@ function Library:new(options)
 				if GUI.CurrentTab ~= nil then
 					GUI.CurrentTab:Deactivate()
 				end
-				
 				Tab.Active = true
 				Library:tween(Tab["18"], {TextColor3 = Color3.fromRGB(74, 74, 180)})
 				Library:tween(Tab["1a"], {ImageColor3 = Color3.fromRGB(74, 74, 180)})
 				Library:tween(Tab["18"], {BackgroundTransparency = 0})
-				Tab["1d"].Visible = true
-				task.wait(0.035)
+				task.wait(0.03)
 				for _, v in ipairs(Tab["1d"]:GetDescendants()) do
 					if v:IsA("Frame") then
 						if v.Name ~= "OptionHolder" then
+							v.BackgroundTransparency = 1
 							Library:tween(v, {BackgroundTransparency = 0})
 						end
 					end
 
 					if v:IsA("TextLabel") then
 						if v.Name == "Inactive Option" then
+							v.BackgroundTransparency = 1
 							Library:tween(v, {BackgroundTransparency = 0})
 						end
+						v.TextTransparency = 1
 						Library:tween(v, {TextTransparency = 0})
 					end
 
 					if v:IsA("ImageLabel") then
+						if v.Name ~= "Checkmark" then
+							v.ImageTransparency = 1
+							Library:tween(v, {ImageTransparency = 0})
+						end
 						for _, v2 in ipairs(Tab.ActiveToggles) do
 							if v2 == v then
 								Library:tween(v, {ImageTransparency = 0})
@@ -678,14 +683,16 @@ function Library:new(options)
 					end
 
 					if v:IsA("UIStroke") then
+						v.Transparency = 1
 						Library:tween(v, {Transparency = 0})
 					end
 					
 					if v:IsA("TextBox") then
+						v.TextTransparency = 1
 						Library:tween(v, {TextTransparency = 0})
 					end
 				end
-				
+				Tab["1d"].Visible = true
 				GUI.CurrentTab = Tab
 				Tab.ActiveToggles = {}
 			end
@@ -694,6 +701,7 @@ function Library:new(options)
 		
 		function Tab:Deactivate()
 			if Tab.Active then
+				Tab["1d"].Visible = false
 				for _, v in ipairs(Tab["1d"]:GetDescendants()) do
 					if v.Name == "Checkmark" and v.ImageTransparency == 0 then
 						table.insert(Tab.ActiveToggles, v)
@@ -719,13 +727,13 @@ function Library:new(options)
 						Library:tween(v, {TextTransparency = 1})
 					end
 				end
-				task.wait(0.035)
+				task.wait(0.03)
 				Tab.Active = false
 				Tab.Hover = false
 				Library:tween(Tab["18"], {TextColor3 = Color3.fromRGB(32, 32, 77)})
 				Library:tween(Tab["1a"], {ImageColor3 = Color3.fromRGB(32, 32, 77)})
 				Library:tween(Tab["18"], {BackgroundTransparency = 1})
-				Tab["1d"].Visible = false
+				
 			end
 		end
 		
@@ -1906,11 +1914,6 @@ function Library:new(options)
 				
 				
 			end
-			
-			
-			
-			
-			
 			
 			return Selection
 		end
