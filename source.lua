@@ -567,7 +567,7 @@ function Library:new(options)
 	function GUI:CreateTab(options)
 		options = Library:validate({
 			title = "Main",
-			icon = "rbxassetid://135715858500363"
+			icon = "rbxassetid://132692071870179"
 		}, options or {})
 		
 		local Tab = {
@@ -647,6 +647,7 @@ function Library:new(options)
 					GUI.CurrentTab:Deactivate()
 				end
 				Tab.Active = true
+				Library:tween(Tab["1a"], {Rotation = 180})
 				Library:tween(Tab["18"], {TextColor3 = Color3.fromRGB(74, 74, 180)})
 				Library:tween(Tab["1a"], {ImageColor3 = Color3.fromRGB(74, 74, 180)})
 				Library:tween(Tab["18"], {BackgroundTransparency = 0})
@@ -730,6 +731,7 @@ function Library:new(options)
 				task.wait(0.03)
 				Tab.Active = false
 				Tab.Hover = false
+				Library:tween(Tab["1a"], {Rotation = 360})
 				Library:tween(Tab["18"], {TextColor3 = Color3.fromRGB(32, 32, 77)})
 				Library:tween(Tab["1a"], {ImageColor3 = Color3.fromRGB(32, 32, 77)})
 				Library:tween(Tab["18"], {BackgroundTransparency = 1})
