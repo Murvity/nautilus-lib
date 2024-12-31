@@ -647,6 +647,7 @@ function Library:new(options)
 					GUI.CurrentTab:Deactivate()
 				end
 				Tab.Active = true
+				Tab["1a"]["Rotation"] = 0
 				Library:tween(Tab["1a"], {Rotation = 180})
 				Library:tween(Tab["18"], {TextColor3 = Color3.fromRGB(74, 74, 180)})
 				Library:tween(Tab["1a"], {ImageColor3 = Color3.fromRGB(74, 74, 180)})
@@ -735,7 +736,6 @@ function Library:new(options)
 				Library:tween(Tab["18"], {TextColor3 = Color3.fromRGB(32, 32, 77)})
 				Library:tween(Tab["1a"], {ImageColor3 = Color3.fromRGB(32, 32, 77)})
 				Library:tween(Tab["18"], {BackgroundTransparency = 1})
-				
 			end
 		end
 		
