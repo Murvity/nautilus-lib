@@ -1910,7 +1910,6 @@ function Library:new(options)
 							Selection["1b"]["Text"] = [[Input]]
 						else
 							Selection.CurrentSelection = Selection["1b"]["Text"]
-							options.callback(Selection.CurrentSelection)
 						end
 					end)
 				end)
