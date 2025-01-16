@@ -1744,7 +1744,8 @@ function Library:new(options)
 		function Tab:CreateSelection(options)
 			options = Library:validate({
 				title = "Selection",
-				callback = function() end
+				callback = function() end,
+				callback2 = function() end
 			}, options or {})
 			
 			local Selection = {
@@ -1910,6 +1911,7 @@ function Library:new(options)
 							Selection["1b"]["Text"] = [[Input]]
 						else
 							Selection.CurrentSelection = Selection["1b"]["Text"]
+							options.callback2(Selection.CurrentSelection)
 						end
 					end)
 				end)
