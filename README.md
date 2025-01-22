@@ -19,7 +19,7 @@ Nautilus is a free UI library, here's what it offers so far:
   
   ------------------------------------------------------
 
-Please keep in mind that this is basically a paste of the UI featured in this [tutorial series](https://www.youtube.com/watch?v=HQoukWZAfQk&list=PLPIdk8AY-0ybhxbzkv88ZGo7Hgxfx_qZD) but with my own color theme!
+Please keep in mind that this is basically a paste of the UI featured in this [tutorial series](https://www.youtube.com/watch?v=HQoukWZAfQk&list=PLPIdk8AY-0ybhxbzkv88ZGo7Hgxfx_qZD)
 
 ------------------------------------------------------
 
