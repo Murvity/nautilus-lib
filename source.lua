@@ -456,8 +456,9 @@ function Library:new(options)
 									for _, v in ipairs(GUI.InactiveTabs3) do
 										v.Visible = false
 									end
-									
-									Library:tween(v, {BackgroundTransparency = 0})
+									if v.Name ~= "Divider" then
+										Library:tween(v, {BackgroundTransparency = 0})
+									end
 								end
 
 								if v:IsA("TextLabel") then
@@ -485,7 +486,9 @@ function Library:new(options)
 								end
 								
 								if v:IsA("UIStroke") then
-									Library:tween(v, {Transparency = 0})
+									if v.Parent.Name ~= "Divider" then
+										Library:tween(v, {Transparency = 0})
+									end
 								end
 								
 								if v:IsA("TextBox") then
@@ -655,7 +658,7 @@ function Library:new(options)
 				task.wait(0.03)
 				for _, v in ipairs(Tab["1d"]:GetDescendants()) do
 					if v:IsA("Frame") then
-						if v.Name ~= "OptionHolder" then
+						if v.Name ~= "OptionHolder" and v.Name ~= "Divider" then
 							v.BackgroundTransparency = 1
 							Library:tween(v, {BackgroundTransparency = 0})
 						end
@@ -685,8 +688,10 @@ function Library:new(options)
 					end
 
 					if v:IsA("UIStroke") then
-						v.Transparency = 1
-						Library:tween(v, {Transparency = 0})
+						if v.Parent.Name ~= "Divider" then
+							v.Transparency = 1
+							Library:tween(v, {Transparency = 0})
+						end
 					end
 					
 					if v:IsA("TextBox") then
@@ -1920,6 +1925,52 @@ function Library:new(options)
 			end
 			
 			return Selection
+		end
+		
+		function Tab:CreateDivider(options)
+			options = Library:validate({
+				title = "Divider"
+			}, options or {})
+			
+			local Divider = {}
+			
+			do
+				Divider["13"] = Instance.new("Frame", Tab["1d"]);
+				Divider["13"]["BorderSizePixel"] = 0;
+				Divider["13"]["BackgroundColor3"] = Color3.fromRGB(12, 12, 32);
+				Divider["13"]["Size"] = UDim2.new(1, 0, 0, 9);
+				Divider["13"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+				Divider["13"]["Name"] = [[Divider]];
+				Divider["13"]["BackgroundTransparency"] = 1;
+
+
+				-- StarterGui.MyLibrary.Main.Contents.Main.Divider.UICorner
+				Divider["14"] = Instance.new("UICorner", Divider["13"]);
+				Divider["14"]["CornerRadius"] = UDim.new(0, 4);
+
+
+				-- StarterGui.MyLibrary.Main.Contents.Main.Divider.UIStroke
+				Divider["15"] = Instance.new("UIStroke", Divider["13"]);
+				Divider["15"]["Transparency"] = 1;
+				Divider["15"]["Color"] = Color3.fromRGB(29, 29, 68);
+
+
+				-- StarterGui.MyLibrary.Main.Contents.Main.Divider.Title
+				Divider["16"] = Instance.new("TextLabel", Divider["13"]);
+				Divider["16"]["BorderSizePixel"] = 0;
+				Divider["16"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+				Divider["16"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+				Divider["16"]["TextSize"] = 11;
+				Divider["16"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.SemiBold, Enum.FontStyle.Normal);
+				Divider["16"]["TextColor3"] = Color3.fromRGB(33, 33, 78);
+				Divider["16"]["BackgroundTransparency"] = 1;
+				Divider["16"]["Size"] = UDim2.new(1, -30, 1, 0);
+				Divider["16"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+				Divider["16"]["Text"] = string.upper(options.title);
+				Divider["16"]["Name"] = [[Title]];
+			end
+			
+			return Divider
 		end
 		
 		return Tab
