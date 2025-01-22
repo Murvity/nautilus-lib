@@ -13,6 +13,9 @@ Nautilus is a free UI library, here's what it offers so far:
   [+] Keybinds
 
   [+] Selections
+
+  [+] Dividers
+
   
   ------------------------------------------------------
 
@@ -105,5 +108,13 @@ Creating a selection:
         callback = function(v)
             var = v
         end
+    })
+
+------------------------------------------------------
+
+Creating a divider:
+
+    divider = tab:CreateDivider({
+        title = "Divider"
     })
 
