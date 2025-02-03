@@ -4,6 +4,7 @@ local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
 local CoreGui = game:GetService("CoreGui")
 local UIS = game:GetService("UserInputService")
+local Mobile = UIS.TouchEnabled and not UIS.KeyboardEnabled and not UIS.MouseEnabled
 
 -- Variables
 local LP = Players.LocalPlayer
@@ -876,15 +877,11 @@ function Library:new(options)
 				UIS.InputBegan:Connect(function(input, gpe)
 					if gpe then return end
 
-					print(input.UserInputType)
-
-					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-						if Button.Hover then
-							Button.MouseDown = true
-							Library:tween(Button["1e"], {BackgroundColor3 = Color3.fromRGB(28, 28, 67)})
-							Library:tween(Button["20"], {Color = Color3.fromRGB(55, 55, 134)})
-							options.callback()
-						end
+					if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and (Button.Hover or Mobile) then
+						Button.MouseDown = true
+						Library:tween(Button["1e"], {BackgroundColor3 = Color3.fromRGB(28, 28, 67)})
+						Library:tween(Button["20"], {Color = Color3.fromRGB(55, 55, 134)})
+						options.callback()
 					end
 				end)
 				
