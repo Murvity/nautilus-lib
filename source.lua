@@ -863,7 +863,11 @@ function Library:new(options)
 			do
 				Button["1e"].MouseEnter:Connect(function()
 					Button.Hover = true
-					print("Hovered")
+					Library:tween(Button["20"], {Color = Color3.fromRGB(55, 55, 134)})
+				end)
+				
+				Button["1e"].TouchTap:Connect(function()
+					Button.Hover = true
 					Library:tween(Button["20"], {Color = Color3.fromRGB(55, 55, 134)})
 				end)
 				
@@ -876,8 +880,6 @@ function Library:new(options)
 				
 				UIS.InputBegan:Connect(function(input, gpe)
 					if gpe then return end
-					
-					print("Began")
 
 					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 						if Button.Hover then
@@ -891,8 +893,6 @@ function Library:new(options)
 				
 				UIS.InputEnded:Connect(function(input, gpe)
 					if gpe then return end
-					
-					print("Ended")
 
 					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 						Button.MouseDown = false
