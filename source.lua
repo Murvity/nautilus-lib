@@ -347,7 +347,7 @@ function Library:new(options)
 		end)
 		
 		UIS.InputBegan:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 then
+			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 				if GUI.Hover4 then
 					Library:tween(GUI["a"], {Rotation = -10})
 					task.wait(0.1)
@@ -373,7 +373,7 @@ function Library:new(options)
 		end)
 
 		UIS.InputBegan:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 then
+			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 				if GUI.Hover2 and not GUI.Done then
 					Library:tween(GUI["6"], {Size = UDim2.new(0, 75, 0, 30)})
 					GUI["1e"]["Image"] = [[rbxassetid://83494634417832]]
@@ -529,7 +529,7 @@ function Library:new(options)
 		end)
 
 		UIS.InputBegan:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 then
+			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 				if GUI.Hover3 then
 					for i, v in pairs(GUI["1"]:GetDescendants()) do
 						if v:IsA("Frame") then
