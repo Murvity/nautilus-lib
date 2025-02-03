@@ -1057,17 +1057,19 @@ function Library:new(options)
 				UIS.InputBegan:Connect(function(input, gpe)
 					if not Mobile and gpe then return end
 
-					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch and Slider.Hover then
-						Slider.MouseDown = true
-						Library:tween(Slider["3d"], {BackgroundColor3 = Color3.fromRGB(28, 28, 67)})
-						Library:tween(Slider["3f"], {Color = Color3.fromRGB(55, 55, 134)})
-						Library:tween(Slider["44"], {Color = Color3.fromRGB(55, 55, 134)})
-						Library:tween(Slider["45"], {BackgroundColor3 = Color3.fromRGB(55, 55, 134)})
-						
-						if not Slider.Connection then
-							Slider.Connection = RunService.RenderStepped:Connect(function()
-								Slider:SetValue()
-							end)
+					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+						if Slider.Hover then
+							Slider.MouseDown = true
+							Library:tween(Slider["3d"], {BackgroundColor3 = Color3.fromRGB(28, 28, 67)})
+							Library:tween(Slider["3f"], {Color = Color3.fromRGB(55, 55, 134)})
+							Library:tween(Slider["44"], {Color = Color3.fromRGB(55, 55, 134)})
+							Library:tween(Slider["45"], {BackgroundColor3 = Color3.fromRGB(55, 55, 134)})
+							
+							if not Slider.Connection then
+								Slider.Connection = RunService.RenderStepped:Connect(function()
+									Slider:SetValue()
+								end)
+							end
 						end
 					end
 				end)
@@ -1226,11 +1228,13 @@ function Library:new(options)
 
 				UIS.InputBegan:Connect(function(input, gpe)
 					if not Mobile and gpe then return end
-					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch and Toggle.Hover then
-						Toggle.MouseDown = true
-						Library:tween(Toggle["51"], {BackgroundColor3 = Color3.fromRGB(28, 28, 67)})
-						Library:tween(Toggle["53"], {Color = Color3.fromRGB(55, 55, 134)})
-						Toggle:Toggle()
+					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+						if Toggle.Hover then
+							Toggle.MouseDown = true
+							Library:tween(Toggle["51"], {BackgroundColor3 = Color3.fromRGB(28, 28, 67)})
+							Library:tween(Toggle["53"], {Color = Color3.fromRGB(55, 55, 134)})
+							Toggle:Toggle()
+						end
 					end
 				end)
 
@@ -1417,12 +1421,14 @@ function Library:new(options)
 					
 					if Dropdown.Items[id] == nil then return end
 
-					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch and Item.Hover then
-						Item.MouseDown = true
-						Library:tween(Dropdown.Items[id].Instance["37"], {BackgroundColor3 = Color3.fromRGB(28, 28, 67)})
-						Library:tween(Dropdown.Items[id].Instance["38"], {Color = Color3.fromRGB(55, 55, 134)})
-						options.callback(value)
-						Dropdown:Toggle()
+					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+						if Item.Hover then
+							Item.MouseDown = true
+							Library:tween(Dropdown.Items[id].Instance["37"], {BackgroundColor3 = Color3.fromRGB(28, 28, 67)})
+							Library:tween(Dropdown.Items[id].Instance["38"], {Color = Color3.fromRGB(55, 55, 134)})
+							options.callback(value)
+							Dropdown:Toggle()
+						end
 					end
 				end)
 
@@ -1511,13 +1517,15 @@ function Library:new(options)
 
 				UIS.InputBegan:Connect(function(input, gpe)
 					if not Mobile and gpe then return end
-					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch and Dropdown.Hover then
-						Dropdown.MouseDown = true
-						Library:tween(Dropdown["2c"], {BackgroundColor3 = Color3.fromRGB(28, 28, 67)})
-						Library:tween(Dropdown["2e"], {Color = Color3.fromRGB(55, 55, 134)})
-						
-						if not Dropdown.HoveringItem then
-							Dropdown:Toggle()
+					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+						if Dropdown.Hover then
+							Dropdown.MouseDown = true
+							Library:tween(Dropdown["2c"], {BackgroundColor3 = Color3.fromRGB(28, 28, 67)})
+							Library:tween(Dropdown["2e"], {Color = Color3.fromRGB(55, 55, 134)})
+							
+							if not Dropdown.HoveringItem then
+								Dropdown:Toggle()
+							end
 						end
 					end
 				end)
@@ -1678,11 +1686,13 @@ function Library:new(options)
 				UIS.InputBegan:Connect(function(input, gpe)
 					if not Mobile and gpe then return end
 
-					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch and Key.Hover then
-						Key.MouseDown = true
-						Library:tween(Key["35"], {BackgroundColor3 = Color3.fromRGB(28, 28, 67)})
-						Library:tween(Key["37"], {Color = Color3.fromRGB(55, 55, 134)})
-						Key:Toggle()
+					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+						if Key.Hover then
+							Key.MouseDown = true
+							Library:tween(Key["35"], {BackgroundColor3 = Color3.fromRGB(28, 28, 67)})
+							Library:tween(Key["37"], {Color = Color3.fromRGB(55, 55, 134)})
+							Key:Toggle()
+						end
 					end
 				end)
 
@@ -1694,7 +1704,6 @@ function Library:new(options)
 						if Key.Hover then
 							Library:tween(Key["35"], {BackgroundColor3 = Color3.fromRGB(10, 10, 30)})
 							Library:tween(Key["37"], {Color = Color3.fromRGB(55, 55, 134)})
-
 						else
 							Library:tween(Key["35"], {BackgroundColor3 = Color3.fromRGB(10, 10, 30)})
 							Library:tween(Key["37"], {Color = Color3.fromRGB(28, 28, 67)})
@@ -1867,11 +1876,13 @@ function Library:new(options)
 				UIS.InputBegan:Connect(function(input, gpe)
 					if not Mobile and gpe then return end
 
-					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch and Selection.Hover then
-						Selection.MouseDown = true
-						Library:tween(Selection["13"], {BackgroundColor3 = Color3.fromRGB(28, 28, 67)})
-						Library:tween(Selection["15"], {Color = Color3.fromRGB(55, 55, 134)})
-						options.callback(Selection.CurrentSelection)
+					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+						if Selection.Hover then
+							Selection.MouseDown = true
+							Library:tween(Selection["13"], {BackgroundColor3 = Color3.fromRGB(28, 28, 67)})
+							Library:tween(Selection["15"], {Color = Color3.fromRGB(55, 55, 134)})
+							options.callback(Selection.CurrentSelection)
+						end
 					end
 				end)
 
