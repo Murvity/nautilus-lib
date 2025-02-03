@@ -876,7 +876,7 @@ function Library:new(options)
 				UIS.InputBegan:Connect(function(input, gpe)
 					if gpe then return end
 
-					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch and Button.Hover then
+					if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and Button.Hover then
 						Button.MouseDown = true
 						Library:tween(Button["1e"], {BackgroundColor3 = Color3.fromRGB(28, 28, 67)})
 						Library:tween(Button["20"], {Color = Color3.fromRGB(55, 55, 134)})
