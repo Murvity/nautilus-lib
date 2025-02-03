@@ -768,9 +768,7 @@ function Library:new(options)
 
 
 			UIS.InputBegan:Connect(function(input, gpe)
-				if not Mobile then
-					if gpe then return end
-				end
+				if not Mobile and gpe then return end
 
 				if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 					if Tab.Hover then
@@ -877,9 +875,7 @@ function Library:new(options)
 				end)
 				
 				UIS.InputBegan:Connect(function(input, gpe)
-					if not Mobile then
-						if gpe then return end
-					end
+					if not Mobile and gpe then return end
 
 					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 						if Button.Hover then
@@ -892,9 +888,7 @@ function Library:new(options)
 				end)
 				
 				UIS.InputEnded:Connect(function(input, gpe)
-					if not Mobile then
-						if gpe then return end
-					end
+					if not Mobile and gpe then return end
 
 					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 						Button.MouseDown = false
@@ -1061,9 +1055,7 @@ function Library:new(options)
 				end)
 
 				UIS.InputBegan:Connect(function(input, gpe)
-					if not Mobile then
-						if gpe then return end
-					end
+					if not Mobile and gpe then return end
 
 					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch and Slider.Hover then
 						Slider.MouseDown = true
@@ -1081,10 +1073,7 @@ function Library:new(options)
 				end)
 
 				UIS.InputEnded:Connect(function(input, gpe)
-					if not Mobile then
-						if gpe then return end
-					end
-
+					if not Mobile and gpe then return end
 					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 						Slider.MouseDown = false
 						if Slider.Hover then
@@ -1236,10 +1225,7 @@ function Library:new(options)
 				end)
 
 				UIS.InputBegan:Connect(function(input, gpe)
-					if not Mobile then
-						if gpe then return end
-					end
-
+					if not Mobile and gpe then return end
 					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch and Toggle.Hover then
 						Toggle.MouseDown = true
 						Library:tween(Toggle["51"], {BackgroundColor3 = Color3.fromRGB(28, 28, 67)})
@@ -1249,9 +1235,7 @@ function Library:new(options)
 				end)
 
 				UIS.InputEnded:Connect(function(input, gpe)
-					if not Mobile then
-						if gpe then return end
-					end
+					if not Mobile and gpe then return end
 
 					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 						Toggle.MouseDown = false
@@ -1429,9 +1413,7 @@ function Library:new(options)
 				end)
 
 				UIS.InputBegan:Connect(function(input, gpe)
-					if not Mobile then
-						if gpe then return end
-					end
+					if not Mobile and gpe then return end
 					
 					if Dropdown.Items[id] == nil then return end
 
@@ -1445,9 +1427,7 @@ function Library:new(options)
 				end)
 
 				UIS.InputEnded:Connect(function(input, gpe)
-					if not Mobile then
-						if gpe then return end
-					end
+					if not Mobile and gpe then return end
 					
 					if Dropdown.Items[id] == nil then return end
 
@@ -1530,10 +1510,7 @@ function Library:new(options)
 				end)
 
 				UIS.InputBegan:Connect(function(input, gpe)
-					if not Mobile then
-						if gpe then return end
-					end
-
+					if not Mobile and gpe then return end
 					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch and Dropdown.Hover then
 						Dropdown.MouseDown = true
 						Library:tween(Dropdown["2c"], {BackgroundColor3 = Color3.fromRGB(28, 28, 67)})
@@ -1546,9 +1523,7 @@ function Library:new(options)
 				end)
 
 				UIS.InputEnded:Connect(function(input, gpe)
-					if not Mobile then
-						if gpe then return end
-					end
+					if not Mobile and gpe then return end
 
 					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 						Dropdown.MouseDown = false
@@ -1701,9 +1676,7 @@ function Library:new(options)
 				end)
 
 				UIS.InputBegan:Connect(function(input, gpe)
-					if not Mobile then
-						if gpe then return end
-					end
+					if not Mobile and gpe then return end
 
 					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch and Key.Hover then
 						Key.MouseDown = true
@@ -1714,9 +1687,7 @@ function Library:new(options)
 				end)
 
 				UIS.InputEnded:Connect(function(input, gpe)
-					if not Mobile then
-						if gpe then return end
-					end
+					if not Mobile and gpe then return end
 
 					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 						Key.MouseDown = false
@@ -1734,9 +1705,7 @@ function Library:new(options)
 
 				-- For the keybind text / letter
 				UIS.InputBegan:Connect(function(key, gpe)
-					if not Mobile then
-						if gpe then return end
-					end
+					if not Mobile and gpe then return end
 					
 					local function GetKeyCode(text)
 						return Enum.KeyCode[text]
@@ -1896,9 +1865,7 @@ function Library:new(options)
 				end)
 
 				UIS.InputBegan:Connect(function(input, gpe)
-					if not Mobile then
-						if gpe then return end
-					end
+					if not Mobile and gpe then return end
 
 					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch and Selection.Hover then
 						Selection.MouseDown = true
@@ -1909,9 +1876,7 @@ function Library:new(options)
 				end)
 
 				UIS.InputEnded:Connect(function(input, gpe)
-					if not Mobile then
-						if gpe then return end
-					end
+					if not Mobile and gpe then return end
 
 					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 						Selection.MouseDown = false
