@@ -876,6 +876,8 @@ function Library:new(options)
 				
 				UIS.InputBegan:Connect(function(input, gpe)
 					if gpe then return end
+					
+					print("Began")
 
 					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 						if Button.Hover then
@@ -889,6 +891,8 @@ function Library:new(options)
 				
 				UIS.InputEnded:Connect(function(input, gpe)
 					if gpe then return end
+					
+					print("Ended")
 
 					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 						Button.MouseDown = false
