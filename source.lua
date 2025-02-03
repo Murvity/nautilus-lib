@@ -294,7 +294,7 @@ function Library:new(options)
 		
 		
 		UIS.InputBegan:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 then
+			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 				if GUI.Hover then
 					if GUI["6"] and GUI["6"].Parent then
 						GUI.Dragging = true
@@ -312,7 +312,7 @@ function Library:new(options)
 		end)
 		
 		UIS.InputChanged:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseMovement then
+			if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
 				if GUI.Hover then
 					if GUI.Dragging then
 						if GUI["6"] and GUI["6"].Parent then
